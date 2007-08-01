@@ -1,0 +1,1 @@
+python ..\seer_wx26.py --preferencesbasepath=C:/seer/seer26
