@@ -218,15 +218,15 @@ class sFrame(wx.Frame):
 
         #Plugin Events
 
-        self.EVT_DRPY_DOCUMENT_CHANGED = 0
-        self.EVT_DRPY_FILE_OPENING = 1
-        self.EVT_DRPY_FILE_OPENED = 2
-        self.EVT_DRPY_FILE_SAVING = 3
-        self.EVT_DRPY_FILE_SAVED = 4
-        self.EVT_DRPY_FILE_CLOSING = 5
-        self.EVT_DRPY_FILE_CLOSED = 6
-        self.EVT_DRPY_NEW = 7
-        self.EVT_DRPY_NEW_PROMPT = 8
+        self.EVT_SEER_DOCUMENT_CHANGED = 0
+        self.EVT_SEER_FILE_OPENING = 1
+        self.EVT_SEER_FILE_OPENED = 2
+        self.EVT_SEER_FILE_SAVING = 3
+        self.EVT_SEER_FILE_SAVED = 4
+        self.EVT_SEER_FILE_CLOSING = 5
+        self.EVT_SEER_FILE_CLOSED = 6
+        self.EVT_SEER_NEW = 7
+        self.EVT_SEER_NEW_PROMPT = 8
 
         #Plugin Arrays:
 
