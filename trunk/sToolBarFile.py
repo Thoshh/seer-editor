@@ -1,3 +1,20 @@
+
+#    Distributed under the terms of the GPL (GNU Public License)
+#
+#    Seer is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 #ToolBar File
 
 import os.path
@@ -76,7 +93,6 @@ def AddandReturn(frame, bitmapFileArray, IDNUM, count, title = ""):
 
 def SetupToolBar(frame):
     try:
-        #AB
         names, f16, f24 = getCustomBitmaps(frame.datdirectory)
 
         if frame.prefs.iconsize == 16:
@@ -234,9 +250,7 @@ def SetupToolBar(frame):
             elif frame.ToolBarList[x] == "Toggle Source Browser":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_TOGGLE_SOURCEBROWSER, x))
             elif frame.ToolBarList[x] == "Preferences":
-            #Fixed by limodou:
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_PREFS, x))
-            #End limodou
 
             elif frame.ToolBarList[x] == "Customize Shortcuts":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_SHORTCUTS, x))

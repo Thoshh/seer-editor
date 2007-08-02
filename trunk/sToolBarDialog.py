@@ -1,3 +1,20 @@
+
+#    Distributed under the terms of the GPL (GNU Public License)
+#
+#    Seer is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 #ToolBar Menu Dialog
 
 import os.path, re
@@ -17,9 +34,6 @@ def GetToolBarLabels(filename, frame):
         sScrolledMessageDialog.ShowMessage(frame, 'File error with: "' + filename + '".', "ERROR")
         return []
 
-        # modified 22/10/2006 Jean-Pierre MANDON
-        # line: rePopUpMenu = re.compile(r'^\s*?sFrame\.AddToolBarFunction\(.*\)', re.MULTILINE)
-        # replaced with
     rePopUpMenu = re.compile(r'^\s*?sFrame\.AddPluginToolBarFunction\(.*\)', re.MULTILINE)
 
     allPopUps = rePopUpMenu.findall(text)
@@ -35,15 +49,8 @@ def GetToolBarLabels(filename, frame):
         if (start > -1) and (end > -1):
             s = s[start+1:end]
             i = s.find(',')
-            # modified 22/10/2006 Jean-Pierre MANDON
-            """
-            e = i + 1 + s[i+1:].find(',')
-            arglabel = s[i+1:e].strip().strip('"')
-            """
-            # replaced with
             arglabel=s[1:i-1]
             arglabel=arglabel.strip().strip('"')
-            # end of modification
             PopUpArray.append("<Plugin>:"+arglabel)
 
     return PopUpArray

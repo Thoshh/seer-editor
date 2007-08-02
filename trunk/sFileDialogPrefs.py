@@ -1,6 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 
+#    Distributed under the terms of the GPL (GNU Public License)
+#
+#    Seer is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 #Prefs Dialog for File Dialog
 
 import wx, wx.lib.dialogs
@@ -78,10 +94,7 @@ class sFilePrefsDialogBase(wx.Dialog):
         self.items = []
 
         self.theSizer = wx.FlexGridSizer(4, 2, 5, 10)
-        #self.theSizer = wx.BoxSizer(wx.VERTICAL)
-        #self.mainSizer = wx.BoxSizer(wx.HORIZONTAL)
         self.menubuttonSizer = wx.BoxSizer(wx.VERTICAL)
-        #self.okcancelSizer = wx.BoxSizer(wx.HORIZONTAL)
 
         self.menubuttonSizer.Add(wx.StaticText(self, -1, "   "), 0, wx.ALIGN_CENTER | wx.SHAPED)
         self.menubuttonSizer.Add(self.btnAdd, 0, wx.SHAPED)

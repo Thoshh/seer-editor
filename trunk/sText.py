@@ -1,3 +1,20 @@
+
+#    Distributed under the terms of the GPL (GNU Public License)
+#
+#    Seer is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 #The Document
 
 import os.path, re
@@ -417,11 +434,6 @@ class sText(sSTC.sStyledTextControl):
             self.SetMarginSensitive(2, False)
             self.SetProperty("fold", "0")
 
-        #LongLineCol from Chris McDonough
-
-        #Adding if statement, else section myself, also added code to use line and/or background method:
-        #I put the set edge color section in under styles.
-
         if self.grandparent.prefs.doclonglinecol > 0:
             self.SetEdgeColumn(self.grandparent.prefs.doclonglinecol)
             self.SetEdgeMode(wx.stc.STC_EDGE_LINE)
@@ -519,20 +531,13 @@ class sText(sSTC.sStyledTextControl):
     def FoldAll(self, expanding):
         lineCount = self.GetLineCount()
 
-        #Yup, this is different from the  demo.py stuff.
-        #This is a really messed up hack of the pype.py and demo.py stuff to act
-        #the way I want it to...
-        #Folding is just ugly.
-
         #Set stuff up first...
         lines = []
-        #franz: lineNum not referenced
         for line in xrange(lineCount):
             lines.append(line)
         lines.reverse()
 
         if not expanding:
-            #Code Inspired by pype.py...Wake wx.stc.STC Up Before we fold!
             self.HideLines(0, lineCount-1)
             wx.Yield()
             self.ShowLines(0, lineCount-1)
@@ -541,23 +546,18 @@ class sText(sSTC.sStyledTextControl):
                 if self.GetFoldLevel(line) & wx.stc.STC_FOLDLEVELHEADERFLAG:
                     self.SetFoldExpanded(line, 1)
 
-        #Back to demo.py...mmmm, open source...Modified ever so slightly
-
         if expanding:
-            #Modify the demo.py stuff to act like pype.py:
             for line in lines:
                 a = self.GetLastChild(line, -1)
                 self.ShowLines(line+1,a)
                 self.SetFoldExpanded(line, True)
         else:
-            #Get pype.py funky(Ever so slightly modified old bean)!
             for line in lines:
                 a = self.GetLastChild(line, -1)
                 self.HideLines(line+1,a)
                 self.SetFoldExpanded(line, False)
 
     def Expand(self, line, doExpand, force=False, visLevels=0, level=-1):
-        #From demo.py (pype.py 1.1.8 uses it too!)
         lastChild = self.GetLastChild(line, level)
         line = line + 1
         while line <= lastChild:

@@ -1,3 +1,20 @@
+
+#    Distributed under the terms of the GPL (GNU Public License)
+#
+#    Seer is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 #Source Browser
 
 import wx
@@ -75,7 +92,6 @@ class sTree(wx.TreeCtrl):
 
     def OnExpandedCollapse(self,event):
 	event.Skip()
-	#AB: it is necesserary to do something to refresh scroll bars
         
     def OnCompareItems(self, item1, item2):
         #Overriding Base, Return -1 for <, 0 for ==, +1 for >
@@ -157,7 +173,7 @@ class sSourceBrowserPanel(wx.Panel):
 
         self.Bind(wx.EVT_BUTTON, self.OnbtnClose, id=101)
         self.Bind(wx.EVT_BUTTON, self.OnbtnRefresh, id=102)
-        self.parent.PBind(self.parent.EVT_DRPY_DOCUMENT_CHANGED, self.OnbtnRefresh, None)
+        self.parent.PBind(self.parent.EVT_SEER_DOCUMENT_CHANGED, self.OnbtnRefresh, None)
         self.edSearch.Bind(wx.EVT_KEY_UP, self.OnedSearch)
         self.edSearch.SetToolTipString("Search in the class-tree")
         self.eol = self.parent.txtDocument.GetEndOfLineCharacter()
@@ -170,7 +186,6 @@ class sSourceBrowserPanel(wx.Panel):
         self.SetAutoLayout(True)
         self.SetSizer(self.theSizer)
 
-        #AB:
         self.Bind(wx.EVT_WINDOW_DESTROY,self.OnClose)
 
     def OnClose(self, event):
@@ -179,8 +194,7 @@ class sSourceBrowserPanel(wx.Panel):
         wx._core.PyDeadObjectError: The C++ part of the sSourceBrowserPanel object has
         been deleted, attribute access no longer allowed."""
         self.parent.SourceBrowser = None
-        self.parent.PUnbind(self.parent.EVT_DRPY_DOCUMENT_CHANGED, self.OnbtnRefresh)
-        #AB end
+        self.parent.PUnbind(self.parent.EVT_SEER_DOCUMENT_CHANGED, self.OnbtnRefresh)
 
     def Browse(self):
         self.classtree.Freeze()
@@ -204,7 +218,6 @@ class sSourceBrowserPanel(wx.Panel):
         Indents = [0]
         currentIndent = 0
 
-        #What is this document using?
         result = self.parent.txtDocument.CheckIndentation()
         wasnotmixed = 1
         if result == 0:
@@ -225,7 +238,6 @@ class sSourceBrowserPanel(wx.Panel):
 
         matcher = self.reinspect.finditer(self.targetText)
 
-        #Get On With It!
         try:
             match = matcher.next()
         except:
@@ -282,7 +294,6 @@ class sSourceBrowserPanel(wx.Panel):
                 currentIndent = currentIndent + 1
                 currentitem = self.classtree.AppendItem(Roots[currentRoot], matchedtext)
                 Roots.append(currentitem)
-                #Submitted bugfix, Franz Steinhausler
                 self.classtree.SetPyData(Roots[-1], None)
                 currentRoot = currentRoot + 1
                 RootArray.append(Roots[currentRoot])
@@ -332,7 +343,6 @@ class sSourceBrowserPanel(wx.Panel):
         o=event.GetEventObject()
         s=o.GetValue().lower()
         if len(s)<2: return
-        #s=self.classtree.GetItemText(self.classtree.GetSelection())
         sel=self.classtree.GetSelection()
         found=False
         start=False

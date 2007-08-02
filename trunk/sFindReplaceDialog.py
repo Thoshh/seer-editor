@@ -1,6 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 
+#    Distributed under the terms of the GPL (GNU Public License)
+#
+#    Seer is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 #FindReplace Dialog
 
 import wx
@@ -9,32 +25,21 @@ import sScrolledMessageDialog
 import re
 
 class sFinder:
-    #copy old finder limodou 2004/04/19
     def __init__(self, parent, stc, oldfinder=None):
     #end limodou
         self.parent = parent
         self.stc = stc
         self.reset()
-        #copy old finder limodou 2004/04/19
         self.Copy(oldfinder)
-        #end limodou
 
-    #copy old finder limodou 2004/04/19
     def Copy(self, finder):
         if finder:
             self.findtext = finder.findtext
             self.findflags = finder.findflags
             self.backwards = finder.backwards
-            #Franz:  Bug Report with Fix
             self.RE = finder.RE
-            #Moved here by Dan.
-            #Edited by Dan
-            #(Bug Report, Franz.)
-            #copy old finder limodou 2004/04/19
             self.docEnd = self.stc.GetTextLength()
             self.SetTargetRange(0, self.docEnd)
-            #end limodou
-    #end limodou
 
     def DoFind(self, findtext, findflags, backwards=False):
         self.parent.SetStatusText(findtext, 2)
@@ -653,8 +658,6 @@ class sFindTextCtrl(wx.ComboBox):
     def __init__(self, parent, id, value, pos, size, returnfunction = None, InFiles = False):
         wx.ComboBox.__init__(self, parent, id, value, pos, size)
 
-        #This is a workaround for a bug in how wx.TextCtrl handles
-        #carriage returns on windows.
         self.parent = parent
         if InFiles:
             self.ancestor = parent.parent.parent
@@ -681,13 +684,10 @@ class sFindTextCtrl(wx.ComboBox):
 
         self.Bind(wx.EVT_RIGHT_DOWN, self.OnPopUp)
 
-        #wxPython Bug Work-Around
         if self.ancestor.PLATFORM_IS_WIN:
             self.insertionpoint = -1
             self.Bind(wx.EVT_SET_FOCUS, self.OnFocus)
-            #franz07/19: catch kill focus
             self.Bind(wx.EVT_KILL_FOCUS, self.OnKillFocus)
-            #endfranz07/19
 
     def AppendToHistory(self, targetList):
         text = self.GetText()
@@ -729,7 +729,6 @@ class sFindTextCtrl(wx.ComboBox):
         eid = event.GetId()
 
         pos = self.GetInsertionPoint()
-        #wxPython Bug Work-Around
         if self.ancestor.PLATFORM_IS_WIN:
             if self.insertionpoint > -1:
                 pos = self.insertionpoint
@@ -846,7 +845,6 @@ class sFindReplaceDialog(wx.Dialog):
         self.txtSearchFor.SetHistory(parent.FindHistory)
 
         if IsReplace:
-            #self.SetSize(wx.Size(400, 345))
             self.txtReplaceWith = sFindTextCtrl(self, -1, "", wx.DefaultPosition, wx.Size(250, -1))
             self.btnPopUpReplaceWith = wx.Button(self, self.ID_BTNRW, " Menu ")
             self.txtReplaceWith.SetHistory(parent.ReplaceHistory)

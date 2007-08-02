@@ -1,5 +1,21 @@
 #!/usr/bin/env python
 
+#    Distributed under the terms of the GPL (GNU Public License)
+#
+#    Seer is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 import sys, os, shutil, re, string, traceback
 import wx, wx.stc
 import  wx.lib.dialogs
@@ -296,18 +312,13 @@ class sFrame(wx.Frame):
             self.ddirectory = self.programdirectory
             os.chdir(self.ddirectory)
 
-        #AB: Removed: it will be called in CreateMenus
-        #self.sscriptmenu = sScriptMenu(self)
-
         self.txtDocument.OnModified(None)
 
         #sScript Shortcuts
-        #AB: Removed: it will be called in CreateMenus
-        #self.sScriptShortcutsAction = self.sscriptmenu.OnScript
 
         self.hasToolBar = False
 
-                #Status Bar
+        #Status Bar
 
         self.CreateStatusBar()
 
@@ -699,10 +710,8 @@ class sFrame(wx.Frame):
             wx.Yield()
         except:
             pass
-        #workaround by Dunderhead.
         if self.PLATFORM_IS_WIN:
             self.txtPromptArray[i]._waitforoutput('>>>')
-        #self.txtPromptArray[i]._waitforoutput('>>>')
         self.txtPromptArray[i].ExecuteCommands(self.prefs.promptstartupscript)
 
     def ExecuteWithPython(self, command = '', statustext = '', pythonargs='', pagetext='Python'):
@@ -1002,10 +1011,6 @@ class sFrame(wx.Frame):
 
         self.PLATFORM_IS_WIN = (sys.platform == "win32")
 
-        #Thanks to Mark Rees.
-        #Thanks to Guillermo Fernandez.
-        #Thanks Bjorn Breid
-
         #Preferences Directory Initial Setup:
 
         self.userhomedirectory = wx.StandardPaths.Get().GetUserConfigDir().replace('\\', '/')
@@ -1070,11 +1075,9 @@ class sFrame(wx.Frame):
         self.pluginsprefsmenu.AddItem(plugin)
 
     def LoadPlugins(self, plugins_file = ""):
-        #todo remove this? is this used? franz 22.03.2007:
         if plugins_file:
             pluginsfile = plugins_file
         else:
-            #end todo remove this? is this used? franz 22.03.2007:
             pluginsfile = self.preferencesdirectory  + "/default.idx"
         if os.path.exists(pluginsfile):
             try:
@@ -1354,22 +1357,17 @@ class sFrame(wx.Frame):
     def OnClose(self, event):
         self.PPost(self.EVT_SEER_FILE_CLOSING)
         if self.txtDocument.GetModify():
-            #prompt saving filename limodou 2004/04/19
             answer = wx.MessageBox('Would you like to save "%s"?' % self.txtDocument.GetFilename(), "Seer", wx.YES_NO | wx.CANCEL | wx.ICON_QUESTION)
-            #end limodou
             if answer == wx.YES:
                 if not self.OnSave(event):
                     return
             elif answer == wx.CANCEL:
                 return
 
-        #franz: oldpos is not used
-        #11/24: :) It is now!  (Adding Franz's BugFix, ironically enough).
         oldpos = self.docPosition
         oldfinder = self.txtDocumentArray[oldpos].Finder
         if len(self.txtDocumentArray) > 1:
             self.DestroyDocument()
-            #Update txtDocument.targetPosition
             x = 0
             l = len(self.txtDocumentArray)
             while x < l:
@@ -1382,7 +1380,6 @@ class sFrame(wx.Frame):
                 if self.docPosition > 0:
                     self.docPosition = self.docPosition + 1
             self.setDocumentTo(self.docPosition, 1)
-            #11/24:
             if oldpos > self.docPosition:
                 if self.txtDocument.Finder:
                     self.txtDocument.Finder.Copy(oldfinder)
@@ -1411,8 +1408,6 @@ class sFrame(wx.Frame):
 
         self.PPost(self.EVT_SEER_FILE_CLOSED)
 
-    # Feb. 17 05 - Adding import all function
-
     def OnImportAll(self, event):
         """When the Import All button is clicked, get the path of each open file,
         and append it to sys.path, then import each file into the interpreter
@@ -1437,9 +1432,6 @@ class sFrame(wx.Frame):
         else:
             return (path[:path.rfind("\\") + 1], path[path.rfind("\\") + 1:path.rfind(".")])
 
-    # End Feb. 17 05 import all changes.
-
-    # Feb. 17 05 - Adding pydoc functions
     def OnPyDocAll(self, event):
         """When the generate pydoc for all files item is selected, get the path of each open file,
         and append it to sys.path, then document each file (via pydoc.writedoc))"""
@@ -1486,7 +1478,6 @@ class sFrame(wx.Frame):
         if dir:
             cwd = os.getcwd()
             os.chdir(dir)
-
             # grab output of pydoc commands in a temp file
             oldstdout = sys.stdout
             fd, tempname = tempfile.mkstemp()
@@ -1499,7 +1490,6 @@ class sFrame(wx.Frame):
             sys.stdout = temp
             # create html file documenting python module
             pydoc.writedoc(str(filePath[1]))
-            #pydoc.writedoc(filePath[1].encode (self.prefs.defaultencoding))
             sys.stdout = oldstdout
             temp.close()
             temp = open(tempname, 'r')
@@ -1529,8 +1519,6 @@ class sFrame(wx.Frame):
         self.txtPrompt.AddText('\n***Press the red "End" button on the Seer toolbar (or CTRL+D) to stop***\n')
         self.txtPrompt.ExecuteCommands("pydoc.gui()")
 
-    # End Feb. 17 05 pydoc changes.
-
     def OnCloseAllDocuments(self, event):
         x = len(self.txtDocumentArray) - 1
         while x > -1:
@@ -1551,7 +1539,6 @@ class sFrame(wx.Frame):
         try:
             i = farray.index(self.txtDocument.filename)
         except:
-            #franz: (Updated Namespace)
             self.ShowMessage("Something went wrong trying to close all other tabs.", "Seer Error")
             return
 
@@ -1560,7 +1547,6 @@ class sFrame(wx.Frame):
             if x != i:
                 self.setDocumentTo(x, True)
                 if self.txtDocument.GetModify():
-                    #prompt saveing filename limodou 2004/04/19
                     if self.Ask('Would you like to save "%s"?' % self.txtDocument.GetFilename(), "Seer"):
                     #end limodou
                         self.OnSave(event)
@@ -1596,7 +1582,6 @@ class sFrame(wx.Frame):
             x, y = self.GetSizeTuple()
             self.SetSize(wx.Size(x-1, y-1))
             self.SetSize(wx.Size(x, y))
-
 
         self.promptnotebook.OnPageChanged(None)
 
@@ -1657,14 +1642,11 @@ class sFrame(wx.Frame):
         self.txtDocument.GotoLine(startline)
         start = self.txtDocument.GetCurrentPos()
         #To the end of the last line selected
-        #Bugfix Chris Wilson
-        #Edited by Dan (selend fix)
         if selend == selstart:
             tend = selend
         else:
             tend = selend - 1
         end = self.txtDocument.GetLineEndPosition(self.txtDocument.LineFromPosition(tend))
-        #End Bugfix Chris Wilson
         eol = self.txtDocument.GetEndOfLineCharacter()
         if self.prefs.doccommentmode == 0:
             self.txtDocument.SetSelection(start, end)
@@ -1704,8 +1686,6 @@ class sFrame(wx.Frame):
         d.Destroy()
 
     def OnDedentRegion(self, event):
-        #Submitted Patch:  Franz Steinhausler
-        #Submitted Patch (ModEvent Mask), Franz Steinhausler
         beg, end = self.txtDocument.GetSelection()
         begline = self.txtDocument.LineFromPosition(beg)
         endline = self.txtDocument.LineFromPosition(end)
@@ -1714,7 +1694,6 @@ class sFrame(wx.Frame):
         self.txtDocument.SetModEventMask(0)
 
         if begline == endline:
-            #This section modified by Dan
             pos = self.txtDocument.PositionFromLine(begline)
             self.txtDocument.SetSelection(pos, pos)
             self.txtDocument.GotoPos(pos)
@@ -1723,7 +1702,6 @@ class sFrame(wx.Frame):
             self.txtDocument.SetModEventMask(mask)
             return
 
-        #Submitted Patch:  Christian Daven
         self.txtDocument.BackTab()
         self.txtDocument.SetModEventMask(mask)
 
@@ -1758,16 +1736,11 @@ class sFrame(wx.Frame):
             wx.EndBusyCursor()
 
     def OnFindAndComplete(self, event):
-        #Submitted Patch by Martinho
-        #now stops at '.' (repre)
-        #re-ordered the text so the list shows the nearer completion words first.
-
         #Get The Current Word
         text = self.txtDocument.GetText()
         pos = self.txtDocument.GetCurrentPos()
         repre = re.compile("\(|\)|\[|\]|\{|\}|\<|\>|\.", re.IGNORECASE | re.MULTILINE)
         regex = re.compile("\w*\Z", re.IGNORECASE | re.MULTILINE)
-        #franz: regexend is not used
         eol = self.txtDocument.GetEndOfLineCharacter()
 
         #Get the left bit
@@ -1790,8 +1763,6 @@ class sFrame(wx.Frame):
             except:
                 if preresult is not None:
                     t = i + preresult.start() + 1
-                    #If t == pos, then you do not want to stop
-                    #at the character.
                     if t < pos:
                         i = t
 
@@ -1922,8 +1893,6 @@ class sFrame(wx.Frame):
         sGetBlockInfo.GoToBlockStart(self.txtDocument, 'def')
 
     def OnIndentRegion(self, event):
-        #Submitted Patch:  Franz Steinhausler
-        #Submitted Patch (ModEvent Mask), Franz Steinhausler
         beg, end = self.txtDocument.GetSelection()
         begline = self.txtDocument.LineFromPosition(beg)
         endline = self.txtDocument.LineFromPosition(end)
@@ -1932,7 +1901,6 @@ class sFrame(wx.Frame):
         self.txtDocument.SetModEventMask(0)
 
         if begline == endline:
-            #This section modified by Dan
             pos = self.txtDocument.PositionFromLine(begline)
             self.txtDocument.SetSelection(pos, pos)
             self.txtDocument.GotoPos(pos)
@@ -2072,8 +2040,6 @@ class sFrame(wx.Frame):
             c = 0
             while c < l:
                 if filenames[c] in alreadyopen:
-                    #franz: pychecker: i is not referenced
-                    #Franz Fixed the fix.
                     i = alreadyopen.index(filenames[c])
                     self.setDocumentTo(i)
                     filenames.pop(c)
@@ -2159,8 +2125,6 @@ class sFrame(wx.Frame):
         recentmenuindex = event.GetId() - self.ID_RECENT_FILES_BASE
         alreadyopen = self.GetAlreadyOpen()
         if self.recentfiles[recentmenuindex] in alreadyopen:
-            #franz: pychecker: i is not referenced
-            #Franz fixed the fix.
             c = alreadyopen.index(self.recentfiles[recentmenuindex])
             self.setDocumentTo(c)
             return
@@ -2331,7 +2295,6 @@ class sFrame(wx.Frame):
             try:
                 dlg.SetDirectory(self.ddirectory)
             except:
-                #franz: ddirectory
                 self.ShowMessage(("Error Setting Default Directory To: " + self.ddirectory), "Seer Error")
         if dlg.ShowModal() == wx.ID_OK:
             old = self.txtDocument.filename
@@ -2388,7 +2351,6 @@ class sFrame(wx.Frame):
         return True
 
     def OnSaveCopy(self, event):
-        #add feature to save a copy, midtoad 2005-10-03
         dlg = sFileDialog.FileDialog(self, "Save Copy To", self.prefs.wildcard, IsASaveDialog=True)
         if self.ddirectory:
             try:
@@ -2411,7 +2373,6 @@ class sFrame(wx.Frame):
             try:
                 dlg.SetDirectory(self.ddirectory)
             except:
-                #franz: ddirectory
                 self.ShowMessage(("Error Setting Default Directory To: " + self.ddirectory), "Seer Error")
         if dlg.ShowModal() == wx.ID_OK:
             pfilename = dlg.GetPath().replace("\\", "/")
@@ -2479,6 +2440,19 @@ class sFrame(wx.Frame):
     def OnSyntaxHighlightingText(self, event):
         self.txtDocument.filetype = 3
         self.txtDocument.SetupPrefsDocument()
+        
+    def OnSyntaxHighlightingRuby(self,event):
+        self.txtDocument.filetype = 4
+        self.txtDocument.SetupPrefsDocument()
+        
+    def OnSyntaxHighlightingJava(self,event):
+        self.txtDocument.filetype = 5
+        self.txtDocument.SetupPrefsDocument()
+        
+    def OnSyntaxHighlightingFortran(self,event):
+        self.txtDocument.filetype = 6
+        self.txtDocument.SetupPrefsDocument()
+        
 
     def OnToggleFold(self, event):
         try:
@@ -2542,21 +2516,17 @@ class sFrame(wx.Frame):
             self.ShowMessage("ToolBar Action Error", "Seer Error")
 
     def OnUnCommentRegion(self, event):
-        #franz: pos is not used
         selstart, selend = self.txtDocument.GetSelection()
         #From the start of the first line selected
         startline = self.txtDocument.LineFromPosition(selstart)
         self.txtDocument.GotoLine(startline)
         start = self.txtDocument.GetCurrentPos()
         #To the end of the last line selected
-        #Bugfix Chris Wilson
-        #Edited by Dan (selend fix)
         if selend == selstart:
             tend = selend
         else:
             tend = selend - 1
         end = self.txtDocument.GetLineEndPosition(self.txtDocument.LineFromPosition(tend))
-        #End Bugfix Chris Wilson
 
         mask = self.txtDocument.GetModEventMask()
         self.txtDocument.SetModEventMask(0)
@@ -2963,10 +2933,6 @@ class sFrame(wx.Frame):
         if self.prefs.docremovetrailingwhitespace and self.txtDocument.filetype == 0:
 
             text = self.txtDocumentArray[docPos].GetText()
-
-            #newtext, n = self.retrailingwhitespace.subn('', text)
-
-            #patch, 23.03.2006:
             newtext = re.sub(r"\s+[\n\r]+", lambda x: x.expand("\g<0>").lstrip(" \t\f\v"), text)
 
             if newtext != text:
@@ -3048,8 +3014,6 @@ class sFrame(wx.Frame):
 
     def SaveFile(self, docPos, IsSaveAs = False, encoding='FromText'):
         self.PPost(self.EVT_SEER_FILE_SAVING)
-        #Submitted Write Access Patch.
-        #Edited slightly by Dan (one if statement, string format).
         if (not os.access(self.txtDocumentArray[docPos].filename, os.W_OK)) and \
             (os.path.exists(self.txtDocumentArray[docPos].filename)):
             self.ShowMessage('Error: Write Access: "%s"' % (self.txtDocumentArray[docPos].filename), 'Save Error')
@@ -3097,16 +3061,12 @@ class sFrame(wx.Frame):
     def setDocumentTo(self, number, ignoreold = 0):
         if not ignoreold:
             self.lastprogargsArray[self.docPosition] = self.lastprogargs
-        #copy old finder limodou 2004/04/19
         oldfinder = self.txtDocumentArray[self.docPosition].Finder
-        #end limodou
 
         self.docPosition = number
         self.txtDocument = self.txtDocumentArray[self.docPosition]
 
-        #copy old finder limodou 2004/04/19
         self.txtDocument.Finder.Copy(oldfinder)
-        #end limodou
 
         self.lastprogargs = self.lastprogargsArray[self.docPosition]
 
@@ -3115,7 +3075,6 @@ class sFrame(wx.Frame):
         if self.txtDocument.filename:
             self.ddirectory = os.path.split(self.txtDocument.filename)[0]
 
-        #franz: (Bad Argument).
         self.updatePrefsMDI()
 
         #Syntax Highlighting
@@ -3126,9 +3085,7 @@ class sFrame(wx.Frame):
         if self.txtDocument.filetype == 2:
             self.highlightmenu.Check(self.ID_HIGHLIGHT_HTML, True)
         if self.txtDocument.filetype == 3:
-            #comment limodou 2004/04/13
             self.highlightmenu.Check(self.ID_HIGHLIGHT_PLAIN_TEXT, True)
-            #end limodou
 
         if self.txtDocument.GetModify():
             if not self.txtDocument.filename:
@@ -3161,7 +3118,6 @@ class sFrame(wx.Frame):
 
         self.currentprompt = self.promptnotebook.GetPage(number)
 
-        #franz: (Bad Argument).
         self.updatePrefsPromptMDI()
 
         if self.txtPromptArray[self.promptPosition].pid != -1:
@@ -3298,7 +3254,6 @@ class sFrame(wx.Frame):
             if thereisafile:
                 self.programmenu.Enable(self.ID_RUN, False)
 
-    #franz: oldprefs not used.
     def updatePrefsMDI(self):
         #Determine What is showing
         self.mainpanel.OnSize(None)
@@ -3349,12 +3304,6 @@ class sFrame(wx.Frame):
         (self.prefs.findreplacepromptonreplace != oldprefs.findreplacepromptonreplace):
             self.FindOptions = []
             self.ReplaceOptions = []
-
-#       #SourceBrowser:
-#       if not (self.prefs.sourcebrowserpanel == oldprefs.sourcebrowserpanel):
-#           for document in self.txtDocumentArray:
-#               if document.SourceBrowser:
-#                   document.SourceBrowser = None
 
         #sScript:
         if self.prefs.sscriptloadexamples != oldprefs.sscriptloadexamples:
@@ -3613,7 +3562,6 @@ class sFrame(wx.Frame):
         self.viewmenu.Append(self.ID_TOGGLE_SOURCEBROWSER, 'Toggle Source Browser')
         self.viewmenu.Append(self.ID_SOURCEBROWSER_GOTO, 'Source Browser Go To', True)
         self.viewmenu.AppendSeparator()
-        #fix bug someone refered in forum limodou 2004/04/20
         self.viewmenu.Append(self.ID_TOGGLE_VIEWWHITESPACE, 'Toggle View Whitespace', False, 12)
         #end limodou
         self.viewmenu.Append(self.ID_TOGGLE_PROMPT, 'Toggle Prompt')
@@ -3626,12 +3574,10 @@ class sFrame(wx.Frame):
         self.programmenu.Append(self.ID_PYTHON, 'Python', False, -1, 'Open a Python Interpreter')
         self.programmenu.Append(self.ID_END, 'End')
         self.programmenu.Append(self.ID_CLOSE_PROMPT, 'Close Prompt')
-        # Feb 17 - adding PyDoc menu items
         self.programmenu.AppendSeparator()
         self.programmenu.Append(self.ID_PYDOC_CURR, self.getmenulabel('Pydoc Current File'))
         self.programmenu.Append(self.ID_PYDOC_ALL, self.getmenulabel('Pydoc All Open Files'))
         self.programmenu.Append(self.ID_VIEW_PYDOC, self.getmenulabel('Browse PyDoc...'))
-        # End Pydoc changes
 
         self.bookmarksmenu = sBookmarksMenu(self)
         self.sscriptmenu = sScriptMenu(self)
@@ -3676,8 +3622,6 @@ class sFrame(wx.Frame):
         self.helpmenu.Append(self.ID_REHOWTO_DOCS, 'View Regular Expression Howto', True)
 
         self.menuBar = wx.MenuBar()
-        #ugly hack workaround
-        #in linux, if there is a menu accelerator, the hotkeys are not working anymore.
         menuBarNamesWin32 = ["&File", "&Edit", "&Search", "&View", "&Program", "&Bookmarks",
                           "D&rScript", "&Documents", "&Options", "&Help"]
 
@@ -3707,7 +3651,6 @@ class sFrame(wx.Frame):
             self.DestroyToolBar()
             self.SetToolBar(None)
         try:
-            #AB
             self.ToolBarList = sToolBarFile.getToolBarList(self.datdirectory)
         except:
             self.ShowMessage("Error Loading ToolBar List", "Seer Error")
@@ -3719,8 +3662,6 @@ class sFrame(wx.Frame):
             self.ToolBarIdList = self.SetupToolBar()
 
             self.SetToolBar(self.toolbar)
-
-    # lm - adding helper functions
 
     def promptSaveAll(self):
         """ check if there are any open unsaved files, and prompt the user to save each """
@@ -3750,11 +3691,6 @@ class sFrame(wx.Frame):
 class sApp(wx.App):
 
     def OnInit(self):
-
-        #lc = wx.Locale(wx.LANGUAGE_DEFAULT)
-        #_ = wx.GetTranslation
-        #lc.AddCatalogLookupPathPrefix('locale')
-        #lc.AddCatalog('seer')
 
         self.frame = sFrame(None, 101, "Seer - Untitled 1")
 

@@ -1,6 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 
+#    Distributed under the terms of the GPL (GNU Public License)
+#
+#    Seer is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 #The Prompt
 
 import os.path, re
@@ -46,9 +62,6 @@ class sPrompt(sSTC.sStyledTextControl):
         self.Bind(wx.EVT_KEY_UP, self.OnKeyUp)
         self.Bind(wx.EVT_UPDATE_UI,  self.RunCheck, id=id)
 
-        #Horrible hack by AB:
-        #I don't know why, but on Linux wx.EVT_IDLE doesn't work without focus 
-        #self.Bind(wx.EVT_IDLE, self.OnIdle)
         if wx.Platform == '__WXGTK__':
             self.Bind(wx.EVT_TIMER, self.OnIdle)
             self.t1 = wx.Timer(self)
@@ -261,7 +274,6 @@ class sPrompt(sSTC.sStyledTextControl):
             event.Skip()
             return
         keycode = event.GetKeyCode()
-        #franz: pos was not used
         if keycode == wx.WXK_HOME:
             if self.GetCurrentPos() < self.editpoint:
                 self.GotoPos(self.editpoint)

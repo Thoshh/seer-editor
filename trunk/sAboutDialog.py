@@ -1,11 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 
-#About Dialog
+#    Distributed under the terms of the GPL (GNU Public License)
+#
+#    Seer is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-# Patch by Knut Gerwens, January 2007: added import of wx.lib.stattext,
-#  replaced all occurences of 'wx.StaticText' with 'wx.lib.stattext.GenStaticText'
-#  because wx.StaticText displayed some lines truncated when wxPython is run with wxGTK
+#About Dialog
 
 import wx, wx.html, wx.lib.stattext
 import sys, string

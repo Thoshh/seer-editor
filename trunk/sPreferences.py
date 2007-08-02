@@ -1,6 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 
+#    Distributed under the terms of the GPL (GNU Public License)
+#
+#    Seer is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 #Preferences
 
 import os.path, re
@@ -254,7 +270,6 @@ class sPreferences:
         self.usewxfiledialog = 0
         self.defaultextension = 1
         self.constantwildcard = '*.lnk'
-        #self.windowsshortcutreplacetable = 'C:,/mnt/win_c#'
         #@ = replace with lowercase match & = replace with exact match
         self.windowsshortcutreplacetable = '[A-Z],/mnt/win_@#'
         if self.platform_is_windows:
@@ -397,8 +412,6 @@ class sPreferences:
         self.promptstartupscript = 'import sys, os, wx'
         self.txtPromptStyleDictionary = dict(map(_stringify, range(17)))
 
-        # lm - changing default prompt style for increased readability
-
         #normal
         self.txtPromptStyleDictionary[0] = "fore:#000000,back:#FFFFFF,size:8,face:Sans Serif"
         if self.platform_is_windows:
@@ -436,7 +449,6 @@ class sPreferences:
         #selection
         self.txtPromptStyleDictionary[16] = "fore:#000000,back:#FF7900"
 
-        # /lm
         #Side Panel Settings
         self.sidepanelleftsize = 30
         self.sidepanelrightsize = 30

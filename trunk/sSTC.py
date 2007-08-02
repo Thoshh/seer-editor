@@ -1,3 +1,20 @@
+
+#    Distributed under the terms of the GPL (GNU Public License)
+#
+#    Seer is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
 #The StyledTextControl Base Class
 
 import re, string
@@ -29,7 +46,6 @@ class sStyledTextControl(wx.stc.StyledTextCtrl):
 
         self.Finder = sFinder(grandparent, self)
 
-        #Python!!!!
         self.filetype = 0
 
         self.stclabelarray = sShortcutsFile.GetSTCShortcutList()
@@ -37,7 +53,6 @@ class sStyledTextControl(wx.stc.StyledTextCtrl):
 
         self.ID_POPUP_BASE = 33000
 
-        #Speed Optimization Submitted by Franz
         self.SetModEventMask(wx.stc.STC_PERFORMED_UNDO | wx.stc.STC_PERFORMED_REDO |\
         wx.stc.STC_MOD_DELETETEXT | wx.stc.STC_MOD_INSERTTEXT)
 
@@ -45,7 +60,6 @@ class sStyledTextControl(wx.stc.StyledTextCtrl):
 
         self.SetDropTarget(self.droptarget)
 
-        #WIERD!
         self.SetProperty("tab.timmy.whinge.level", "1")
 
         #Right Click Menu
@@ -117,7 +131,6 @@ class sStyledTextControl(wx.stc.StyledTextCtrl):
         return '\n'
 
     def GetIndentationCharacter(self):
-        #What is this document using?
         result = self.CheckIndentation()
         if result == 0:
             if self.grandparent.prefs.docusetabs[self.filetype]:
@@ -143,7 +156,6 @@ class sStyledTextControl(wx.stc.StyledTextCtrl):
         event.Skip()
 
     def OnPopUp(self, event):
-        #fast context #ugly hack franz
         if event.ControlDown():
             import sAboutDialog
             dlg = sAboutDialog.sAboutDialog(self.grandparent)
