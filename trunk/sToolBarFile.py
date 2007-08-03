@@ -184,8 +184,8 @@ def SetupToolBar(frame):
             elif frame.ToolBarList[x] == "Go To Def End":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_GOTO_DEF_END, x))
 
-            elif frame.ToolBarList[x] == "Source Browser Go To":
-                ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_SOURCEBROWSER_GOTO, x))
+            #elif frame.ToolBarList[x] == "Source Browser Go To":
+            #    ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_SOURCEBROWSER_GOTO, x))
 
             elif frame.ToolBarList[x] == "Find And Complete":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_FIND_AND_COMPLETE, x))
@@ -247,8 +247,8 @@ def SetupToolBar(frame):
             elif frame.ToolBarList[x] == "View In Top Panel":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_VIEW_IN_TOP_PANEL, x))
 
-            elif frame.ToolBarList[x] == "Toggle Source Browser":
-                ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_TOGGLE_SOURCEBROWSER, x))
+            #elif frame.ToolBarList[x] == "Toggle Source Browser":
+            #    ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_TOGGLE_SOURCEBROWSER, x))
             elif frame.ToolBarList[x] == "Preferences":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_PREFS, x))
 

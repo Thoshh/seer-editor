@@ -29,7 +29,7 @@ from sBookmarksMenu import sBookmarksMenu
 from sScriptMenu import sScriptMenu
 from sPluginMenu import sPluginConfigureMenu, sPluginIndexMenu, sPluginAboutMenu, sPluginHelpMenu, sPluginPreferencesMenu
 import sGetBlockInfo
-import sSourceBrowserGoTo
+# import sSourceBrowserGoTo
 import sFileDialog
 import sPrefsFile
 from sPreferences import sPreferences
@@ -37,7 +37,7 @@ import sShortcutsFile
 import sShortcuts
 import sToolBarFile
 import sTabNanny
-from sSourceBrowser import sSourceBrowserPanel
+# from sSourceBrowser import sSourceBrowserPanel
 import sEncoding
 from sStyleDialog import sSeparatorDialog
 from sMenu import sMenu
@@ -171,7 +171,7 @@ class sFrame(wx.Frame):
 
         self.mainpanel.RememberPanelSizes()
 
-        self.SourceBrowser = None
+        # self.SourceBrowser = None
         self.Debugger = None
 
         #Colour:
@@ -399,7 +399,7 @@ class sFrame(wx.Frame):
         self.Bind(wx.EVT_MENU,  self.OnGoToDefStart, id=self.ID_GOTO_DEF_START)
         self.Bind(wx.EVT_MENU,  self.OnGoToDefEnd, id=self.ID_GOTO_DEF_END)
 
-        self.Bind(wx.EVT_MENU,  self.OnSourceBrowserGoTo, id=self.ID_SOURCEBROWSER_GOTO)
+        # self.Bind(wx.EVT_MENU,  self.OnSourceBrowserGoTo, id=self.ID_SOURCEBROWSER_GOTO)
 
         self.Bind(wx.EVT_MENU,  self.OnZoomIn, id=self.ID_ZOOM_IN)
         self.Bind(wx.EVT_MENU,  self.OnZoomOut, id=self.ID_ZOOM_OUT)
@@ -417,7 +417,7 @@ class sFrame(wx.Frame):
         self.Bind(wx.EVT_MENU,  self.OnViewInRightPanel, id=self.ID_VIEW_IN_RIGHT_PANEL)
         self.Bind(wx.EVT_MENU,  self.OnViewInTopPanel, id=self.ID_VIEW_IN_TOP_PANEL)
 
-        self.Bind(wx.EVT_MENU,  self.OnToggleSourceBrowser, id=self.ID_TOGGLE_SOURCEBROWSER)
+        # self.Bind(wx.EVT_MENU,  self.OnToggleSourceBrowser, id=self.ID_TOGGLE_SOURCEBROWSER)
         self.Bind(wx.EVT_MENU,  self.OnToggleViewWhiteSpace, id=self.ID_TOGGLE_VIEWWHITESPACE)
         self.Bind(wx.EVT_MENU,  self.OnTogglePrompt, id=self.ID_TOGGLE_PROMPT)
 
@@ -496,13 +496,14 @@ class sFrame(wx.Frame):
                     x = x + 1
 
         #Load SourceBrowser:
-        if self.prefs.sourcebrowserisvisible:
-            self.ShowSourceBrowser()
+        #Removing Source Browser for now
+        #if self.prefs.sourcebrowserisvisible:
+        #    self.ShowSourceBrowser()
 
-        self.Bind(wx.EVT_END_PROCESS,  self.OnProcessEnded, id=-1)
+        #self.Bind(wx.EVT_END_PROCESS,  self.OnProcessEnded, id=-1)
 
-        self.Bind(wx.EVT_KEY_DOWN, self.OnKeyDown)
-        self.Bind(wx.EVT_CLOSE, self.OnCloseW)
+        #self.Bind(wx.EVT_KEY_DOWN, self.OnKeyDown)
+        #self.Bind(wx.EVT_CLOSE, self.OnCloseW)
 
         self.LoadPlugins()
 
@@ -511,14 +512,9 @@ class sFrame(wx.Frame):
         item = wx.MenuItem(menu, id, label, label)
         menuiconfile = self.bitmapdirectory + "/16/" + s + ".png"
         if os.path.exists(menuiconfile):
-            #try:
             img = wx.Image(menuiconfile, wx.BITMAP_TYPE_PNG)
             bmp = wx.BitmapFromImage(img)
-            #except?
-        #else:
-            #bmp = wx.EmptyBitmap(16, 16) #width the same, background colour frame colour, so alignment is assured
             item.SetBitmap(bmp)
-        #item.SetBitmap(bmp)
         menu.AppendItem(item)
 
     def AddKeyEvent(self, function, Keycode, Control=0, Shift=0, Alt=0, Meta=0):
@@ -910,7 +906,7 @@ class sFrame(wx.Frame):
         self.ID_GOTO_DEF_START = 1155
         self.ID_GOTO_DEF_END = 1156
 
-        self.ID_SOURCEBROWSER_GOTO = 1157
+        #self.ID_SOURCEBROWSER_GOTO = 1157
 
         self.ID_SELECT_ALL = 1161
 
@@ -950,7 +946,7 @@ class sFrame(wx.Frame):
         self.ID_TOGGLE_FOLD = 1613
         self.ID_FOLD_ALL = 1611
         self.ID_EXPAND_ALL = 1612
-        self.ID_TOGGLE_SOURCEBROWSER = 163
+        #self.ID_TOGGLE_SOURCEBROWSER = 163
         self.ID_TOGGLE_VIEWWHITESPACE = 164
         self.ID_TOGGLE_PROMPT = 165
 
@@ -1401,8 +1397,8 @@ class sFrame(wx.Frame):
         self.txtDocument.OnModified(None)
         self.documentnotebook.OnPageChanged(None)
         self.reloaddocumentsmenu()
-        if self.SourceBrowser is not None:
-            self.SourceBrowser.Browse()
+        #if self.SourceBrowser is not None:
+        #    self.SourceBrowser.Browse()
 
         self.txtDocument.SetupLineNumbersMargin()
 
@@ -2238,8 +2234,8 @@ class sFrame(wx.Frame):
             return self.OnSaveAs(event)
         else:
             self.SaveFile(self.docPosition)
-            if self.prefs.sourcebrowserautorefreshonsave and (self.SourceBrowser is not None):
-                self.SourceBrowser.Browse()
+            #if self.prefs.sourcebrowserautorefreshonsave and (self.SourceBrowser is not None):
+            #    self.SourceBrowser.Browse()
         return True
 
     def OnSaveAll(self, event):
@@ -2422,8 +2418,8 @@ class sFrame(wx.Frame):
             self.lastprogargsArray[self.docPosition] = self.lastprogargs
         d.Destroy()
 
-    def OnSourceBrowserGoTo(self, event):
-        sSourceBrowserGoTo.SourceBrowserGoTo(self, self.txtDocument)
+    #def OnSourceBrowserGoTo(self, event):
+    #    sSourceBrowserGoTo.SourceBrowserGoTo(self, self.txtDocument)
 
     def OnSyntaxHighlightingPython(self, event):
         self.txtDocument.filetype = 0
@@ -2474,17 +2470,17 @@ class sFrame(wx.Frame):
             self.mainpanel.OnSize(None)
             self.txtPrompt.SetFocus()
 
-    def OnToggleSourceBrowser(self, event):
-        if self.SourceBrowser is None:
-            target, i = self.mainpanel.GetTargetNotebookPage(self.prefs.sourcebrowserpanel, 'Source Browser')
-            self.SourceBrowser = sSourceBrowserPanel(target, -1, self.prefs.sourcebrowserpanel, i)
-            self.mainpanel.SetPanelSize(self.prefs.sourcebrowserpanel, self.prefs.sourcebrowsersize)
-            target.SetPanel(self.SourceBrowser)
-            self.mainpanel.ShowPanel(self.prefs.sourcebrowserpanel, i)
-        else:
-            if not self.mainpanel.IsVisible(self.SourceBrowser.position, self.SourceBrowser.Index):
-                self.SourceBrowser.Browse()
-            self.mainpanel.TogglePanel(self.SourceBrowser.position, self.SourceBrowser.Index)
+    #def OnToggleSourceBrowser(self, event):
+    #    if self.SourceBrowser is None:
+    #        target, i = self.mainpanel.GetTargetNotebookPage(self.prefs.sourcebrowserpanel, 'Source Browser')
+    #        self.SourceBrowser = sSourceBrowserPanel(target, -1, self.prefs.sourcebrowserpanel, i)
+    #        self.mainpanel.SetPanelSize(self.prefs.sourcebrowserpanel, self.prefs.sourcebrowsersize)
+    #        target.SetPanel(self.SourceBrowser)
+    #        self.mainpanel.ShowPanel(self.prefs.sourcebrowserpanel, i)
+    #    else:
+    #        if not self.mainpanel.IsVisible(self.SourceBrowser.position, self.SourceBrowser.Index):
+    #            self.SourceBrowser.Browse()
+    #        self.mainpanel.TogglePanel(self.SourceBrowser.position, self.SourceBrowser.Index)
 
     def OnToggleViewWhiteSpace(self, event):
         if self.txtPrompt.GetSTCFocus():
@@ -2840,12 +2836,12 @@ class sFrame(wx.Frame):
             self.txtDocument.OnModified(None)
 
             #Load SourceBrowser:
-            if self.prefs.sourcebrowserisvisible:
-                self.ShowSourceBrowser()
+            #if self.prefs.sourcebrowserisvisible:
+            #    self.ShowSourceBrowser()
 
             #Refresh SourceBrowser:
-            if self.SourceBrowser is not None:
-                self.SourceBrowser.Browse()
+            #if self.SourceBrowser is not None:
+            #    self.SourceBrowser.Browse()
 
             if editrecentfiles:
                 self.ddirectory = os.path.dirname(filename)
@@ -3201,7 +3197,7 @@ class sFrame(wx.Frame):
     def ShowMessage(self, msg, title='Seer'):
         sScrolledMessageDialog.ShowMessage(self, msg, title)
 
-    def ShowSourceBrowser(self):
+    """def ShowSourceBrowser(self):
         if self.SourceBrowser is None:
             target, i = self.mainpanel.GetTargetNotebookPage(self.prefs.sourcebrowserpanel, 'Source Browser')
             self.SourceBrowser = sSourceBrowserPanel(target, -1, self.prefs.sourcebrowserpanel, i)
@@ -3210,7 +3206,7 @@ class sFrame(wx.Frame):
             self.mainpanel.ShowPanel(self.prefs.sourcebrowserpanel, i)
         else:
             self.SourceBrowser.Browse()
-            self.mainpanel.ShowPanel(self.SourceBrowser.position, self.SourceBrowser.Index, True)
+            self.mainpanel.ShowPanel(self.SourceBrowser.position, self.SourceBrowser.Index, True)"""
 
     def ShowPrompt(self, Visible = True):
         if Visible:
@@ -3559,8 +3555,8 @@ class sFrame(wx.Frame):
         self.viewmenu.AppendSeparator()
         self.viewmenu.AppendMenu(self.ID_HIGHLIGHT, "&Syntax Highlighting", self.highlightmenu)
         self.viewmenu.AppendSeparator()
-        self.viewmenu.Append(self.ID_TOGGLE_SOURCEBROWSER, 'Toggle Source Browser')
-        self.viewmenu.Append(self.ID_SOURCEBROWSER_GOTO, 'Source Browser Go To', True)
+        #self.viewmenu.Append(self.ID_TOGGLE_SOURCEBROWSER, 'Toggle Source Browser')
+        #self.viewmenu.Append(self.ID_SOURCEBROWSER_GOTO, 'Source Browser Go To', True)
         self.viewmenu.AppendSeparator()
         self.viewmenu.Append(self.ID_TOGGLE_VIEWWHITESPACE, 'Toggle View Whitespace', False, 12)
         #end limodou

@@ -516,16 +516,17 @@ def SetShortcuts(frame, Shortcuts, ShortcutNames, useDefault=0):
         elif(ShortcutNames[x] == "Expand All"):
             shortcutsActionArray.append(frame.OnExpandAll)
             shortcutsArgumentsArray.append("frame, event")
-        elif(ShortcutNames[x] == "Source Browser Go To"):
-            if useDefault:
-                Shortcuts[x] = 'Control' + str(wx.WXK_F8)
-            shortcutsActionArray.append(frame.OnSourceBrowserGoTo)
-            shortcutsArgumentsArray.append("frame, event")
-        elif(ShortcutNames[x] == "Toggle Source Browser"):
-            if useDefault:
-                Shortcuts[x] = str(wx.WXK_F8)
-            shortcutsActionArray.append(frame.OnToggleSourceBrowser)
-            shortcutsArgumentsArray.append("frame, event")
+        #elif(ShortcutNames[x] == "Source Browser Go To"):
+        #    if useDefault:
+        #        Shortcuts[x] = 'Control' + str(wx.WXK_F8)
+        #    shortcutsActionArray.append(frame.OnSourceBrowserGoTo)
+        #    shortcutsArgumentsArray.append("frame, event")
+        #elif(ShortcutNames[x] == "Toggle Source Browser"):
+        #    if useDefault:
+        #        Shortcuts[x] = str(wx.WXK_F8)
+        #    shortcutsActionArray.append(frame.OnToggleSourceBrowser)
+        #    shortcutsArgumentsArray.append("frame, event")
+        
         elif(ShortcutNames[x] == "Toggle View Whitespace"):
             if useDefault:
                 Shortcuts[x] = 'ControlShift' + str(ord('W'))

@@ -83,14 +83,14 @@ class sAboutContentPanel(wx.Panel):
 
         app.SetFont(standardfont)
 
-        author = wx.lib.stattext.GenStaticText(self, -1, '(c) 2003-2007, Daniel Pozmanter')
+        author = wx.lib.stattext.GenStaticText(self, -1, '(c) 2007, David Torres')
         author.SetBackgroundColour(wx.WHITE)
 
         author.SetFont(standardfont)
 
         credits = sStaticLink(self, 1, ' Credits ', sframe.programdirectory + "/documentation/credits.html", sframe)
 
-        website = sStaticLink(self, 2, ' http://drpython.sourceforge.net/ ', 'http://drpython.sourceforge.net/', sframe)
+        website = sStaticLink(self, 2, ' http://code.google.com/ ', 'http://code.google.com/', sframe)
 
         self.theSizer = wx.BoxSizer(wx.VERTICAL)
         tempstat = wx.lib.stattext.GenStaticText(self, -1, '   ')

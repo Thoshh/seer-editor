@@ -22,6 +22,8 @@ from sShortcuts import BuildShortcutString, GetKeycodeStringFromShortcut, MatchC
 
 def GetShortcutList():
     #Shortcut List
+    
+    """Removes: "Source Browser Go To", "Toggle Source Browser","""
 
     return ["Check Syntax", "Close",
     "Close All Documents", "Close All Other Documents",
@@ -42,9 +44,8 @@ def GetShortcutList():
     "Reload File", "Replace",
     "Restore From Backup", "Run", "Save", "Save All Documents", "Save As",
     "Save Prompt Output To File", "Set Arguments",
-    "Source Browser Go To",
     "Toggle Fold",
-    "Toggle Maximize", "Toggle Prompt","Toggle Source Browser", "Toggle View Whitespace",
+    "Toggle Maximize", "Toggle Prompt", "Toggle View Whitespace",
     "UnComment",
     "View In Left Panel", "View In Right Panel", "View In Top Panel",
     "View Python Docs", "View Regular Expression Howto", "View WxWidgets Docs"]

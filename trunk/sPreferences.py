@@ -36,6 +36,16 @@ def GetPreferencesDictionary():
     #Each item in the Array:
     #(Preference, Preferences File String, Function)
     #Function: 0: (GetPref, Not an Integer,), 1: (GetPref, Integer), 2: (ExtractPref, Not an Integer).
+    #removed: 'Source Browser': [('sourcebrowserpanel', 'sourcebrowser.panel', 1),
+    #('sourcebrowsersize', 'sourcebrowser.size', 1),
+    #('sourcebrowserisvisible', 'sourcebrowser.is.visible', 1),
+    #('sourcebrowsercloseonactivate', 'sourcebrowser.close.on.activate', 1),
+    #('sourcebrowserissorted', 'sourcebrowser.is.sorted', 1),
+    #('sourcebrowserautorefreshonsave', 'sourcebrowser.auto.refresh.on.save', 1),
+    #('sourcebrowserautorefresh', 'sourcebrowser.auto.refresh', 1),
+    #('sourcebrowseruseimages', 'sourcebrowser.use.images', 1),
+    #('sourcebrowserstyle', 'sourcebrowser.style', 0)],"""
+
     return {'General': [('rememberwindowsizeandposition', 'remember.window.size.and.position', 1),
 ('rememberdialogsizesandpositions', 'remember.dialog.sizes.and.positions', 1),
 ('rememberpanelsizes', 'remember.panel.sizes', 1),
@@ -215,15 +225,6 @@ def GetPreferencesDictionary():
 ('findreplacepromptonreplace', 'find.replace.prompt.on.replace', 1),
 ('findreplaceautowrap', 'find.replace.auto.wrap', 1),
 ('findreplaceundercursor', 'find.replace.prompt.under.cursor', 1)],
-'Source Browser': [('sourcebrowserpanel', 'sourcebrowser.panel', 1),
-('sourcebrowsersize', 'sourcebrowser.size', 1),
-('sourcebrowserisvisible', 'sourcebrowser.is.visible', 1),
-('sourcebrowsercloseonactivate', 'sourcebrowser.close.on.activate', 1),
-('sourcebrowserissorted', 'sourcebrowser.is.sorted', 1),
-('sourcebrowserautorefreshonsave', 'sourcebrowser.auto.refresh.on.save', 1),
-('sourcebrowserautorefresh', 'sourcebrowser.auto.refresh', 1),
-('sourcebrowseruseimages', 'sourcebrowser.use.images', 1),
-('sourcebrowserstyle', 'sourcebrowser.style', 0)],
 'Bookmarks': [('bookmarksstyle', 'bookmarks.style', 0)],
 'Plugins': [('pluginsdirectory', 'plugins.directory', 2)],
 'sScript': [('sscriptsdirectory', 'sscripts.directory', 2),
@@ -466,17 +467,18 @@ class sPreferences:
         self.findreplaceundercursor = 1
 
         #Source Browser Settings
-        self.sourcebrowserpanel = 0
-        self.sourcebrowsersize = 25
-        self.sourcebrowserisvisible = 1
-        self.sourcebrowsercloseonactivate = 0
-        self.sourcebrowserissorted = 0
-        self.sourcebrowserautorefreshonsave = 1
-        self.sourcebrowserautorefresh = 0
-        self.sourcebrowseruseimages = 0
-        self.sourcebrowserstyle = "fore:#FF0000,back:#FFFFFF,size:10,face:Sans Serif"
-        if self.platform_is_windows:
-            self.sourcebrowserstyle = "fore:#FF0000,back:#FFFFFF,size:10,face:MS Sans Serif"
+        
+        #self.sourcebrowserpanel = 0
+        #self.sourcebrowsersize = 25
+        #self.sourcebrowserisvisible = 1
+        #self.sourcebrowsercloseonactivate = 0
+        #self.sourcebrowserissorted = 0
+        #self.sourcebrowserautorefreshonsave = 1
+        #self.sourcebrowserautorefresh = 0
+        #self.sourcebrowseruseimages = 0
+        #self.sourcebrowserstyle = "fore:#FF0000,back:#FFFFFF,size:10,face:Sans Serif"
+        #if self.platform_is_windows:
+        #    self.sourcebrowserstyle = "fore:#FF0000,back:#FFFFFF,size:10,face:MS Sans Serif"
 
         #Bookmarks Settings
         self.bookmarksstyle = "fore:#000000,back:#FFFFFF,size:12,face:fixed,bold"
@@ -502,7 +504,7 @@ class sPreferences:
         self.printtabwidth = 4
 
         #Documentation Settings
-        self.documentationbrowser = "mozilla"
+        self.documentationbrowser = "firefox"
         if self.platform_is_windows:
             self.documentationbrowser = "<os.startfile>"
         self.documentationpythonlocation = "http://www.python.org/doc/current/"

@@ -188,9 +188,9 @@ class sText(sSTC.sStyledTextControl):
         if self.DynamicScript:
             return
         if not self.IsSplitView:
-            if self.grandparent.prefs.sourcebrowserautorefresh:
-                if self.grandparent.SourceBrowser is not None:
-                    self.grandparent.SourceBrowser.Browse()
+            #if self.grandparent.prefs.sourcebrowserautorefresh:
+            #    if self.grandparent.SourceBrowser is not None:
+            #        self.grandparent.SourceBrowser.Browse()
             modify = self.GetModify()
             if (modify != self.modified) or (event is None):
                 self.modified = modify

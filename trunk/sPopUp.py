@@ -93,6 +93,8 @@ def OnPopUpMenu(stc, event):
                 pass
 
 def SetUpPopUpActions(frame):
+    
+    #pulled these: "Source Browser Go To":frame.OnSourceBrowserGoTo, "Toggle Source Browser":frame.OnToggleSourceBrowser,
 
     actiondictionary = {"New":frame.OnNew, "Open":frame.OnOpen, "Open Imported Module":frame.OnOpenImportedModule,
     "Save":frame.OnSave, "Save As":frame.OnSaveAs,
@@ -112,12 +114,11 @@ def SetUpPopUpActions(frame):
     "Go To Block Start":frame.OnGoToBlockStart, "Go To Block End":frame.OnGoToBlockEnd,
     "Go To Class Start":frame.OnGoToClassStart, "Go To Class End":frame.OnGoToClassEnd,
     "Go To Def Start":frame.OnGoToDefStart, "Go To Def End":frame.OnGoToDefEnd,
-    "Source Browser Go To":frame.OnSourceBrowserGoTo,
     "Comment":frame.OnCommentRegion, "UnComment":frame.OnUnCommentRegion,
     "Find And Complete":frame.OnFindAndComplete,
     "Indent":frame.OnIndentRegion, "Dedent":frame.OnDedentRegion,
     "Toggle Fold":frame.OnToggleFold, "Fold All":frame.OnFoldAll, "Expand All":frame.OnExpandAll,
-    "Toggle Source Browser":frame.OnToggleSourceBrowser, "Toggle View Whitespace":frame.OnToggleViewWhiteSpace,
+    "Toggle View Whitespace":frame.OnToggleViewWhiteSpace,
     "Toggle Prompt":frame.OnTogglePrompt,
     "Run":frame.OnRun, "Set Arguments":frame.OnSetArgs, "Python":frame.OnPython,
     "End":frame.OnEnd, "Check Syntax":frame.OnCheckSyntax,

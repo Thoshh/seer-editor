@@ -1088,6 +1088,7 @@ class SidePanelPanel(PrefsPanel):
         self.sldrSizeRight.SetValue(self.grandparent.prefs.sidepanelrightsize)
         self.sldrSizeTop.SetValue(self.grandparent.prefs.sidepaneltopsize)
 
+"""
 class SourceBrowserPanel(PrefsPanel):
 
     def __init__(self, parent, id, name):
@@ -1140,6 +1141,7 @@ class SourceBrowserPanel(PrefsPanel):
             self.grandparent.prefs.sourcebrowserstyle = d.GetStyleString()
 
         d.Destroy()
+"""
 
 class sPrefsDialog(wx.Dialog):
 
@@ -1211,7 +1213,7 @@ class sPrefsDialog(wx.Dialog):
         self.pnlPrint = PrintPanel(self.lbPrefs, -1, "Printing")
         self.pnlPrompt = PromptPanel(self.lbPrefs, -1, "Prompt")
         self.pnlSidePanels = SidePanelPanel(self.lbPrefs, -1, "Side Panels")
-        self.pnlSourceBrowser = SourceBrowserPanel(self.lbPrefs, -1, "Source Browser")
+        #self.pnlSourceBrowser = SourceBrowserPanel(self.lbPrefs, -1, "Source Browser")
 
         self.lbPrefs.AddPage(self.pnlGeneral, "General")
         self.lbPrefs.AddPage(self.pnlBookmarks, "Bookmarks")
@@ -1226,7 +1228,7 @@ class sPrefsDialog(wx.Dialog):
         self.lbPrefs.AddPage(self.pnlPrint, "Printing")
         self.lbPrefs.AddPage(self.pnlPrompt, "Prompt")
         self.lbPrefs.AddPage(self.pnlSidePanels, "Side Panels")
-        self.lbPrefs.AddPage(self.pnlSourceBrowser, "Source Browser")
+        #self.lbPrefs.AddPage(self.pnlSourceBrowser, "Source Browser")
 
 
         self.lbPrefs.ShowPanel(parent.prefdialogposition)
@@ -1287,7 +1289,7 @@ class sPrefsDialog(wx.Dialog):
         answer = wx.MessageBox("This will reset all preferences to the program default.\n(You still need to click update and/or save)\nAre you sure you want to do this?", "Reset Preferences", wx.YES_NO | wx.ICON_QUESTION)
         if answer == wx.YES:
             self.prefs.reset()
-            self.pnlSourceBrowser.reset()
+            #self.pnlSourceBrowser.reset()
             self.pnlDocument.reset()
             self.pnlDocumentation.reset()
             self.pnlsScript.reset()
@@ -1462,6 +1464,7 @@ class sPrefsDialog(wx.Dialog):
         self.prefs.sidepanelrightsize = int(self.pnlSidePanels.sldrSizeRight.GetValue())
         self.prefs.sidepaneltopsize = int(self.pnlSidePanels.sldrSizeTop.GetValue())
 
+        """
         #Source Browser
         self.prefs.sourcebrowserpanel = self.pnlSourceBrowser.positionchooser.GetSelection()
         self.prefs.sourcebrowsersize = self.pnlSourceBrowser.sldrSize.GetValue()
@@ -1471,6 +1474,7 @@ class sPrefsDialog(wx.Dialog):
         self.prefs.sourcebrowserautorefreshonsave = int(self.pnlSourceBrowser.chkautorefreshonsave.GetValue())
         self.prefs.sourcebrowserautorefresh = int(self.pnlSourceBrowser.chkautorefresh.GetValue())
         self.prefs.sourcebrowseruseimages = int(self.pnlSourceBrowser.chkuseimages.GetValue())
+        """
 
         #Printing
         self.prefs.printdoclinenumbers = int(self.pnlPrint.chkdoclinenumbers.GetValue())
