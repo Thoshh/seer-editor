@@ -22,7 +22,7 @@
 import wx, wx.html, wx.lib.stattext
 import sys, string
 
-class drStaticLink(wx.Panel):
+class sStaticLink(wx.Panel):
 
     def __init__(self, parent, id, text, target, sframe):
         wx.Panel.__init__(self, parent, id)

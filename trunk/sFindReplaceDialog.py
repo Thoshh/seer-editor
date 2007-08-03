@@ -300,7 +300,7 @@ class sFinder:
         try:
             regularexpression = re.compile(findtext, case | re.MULTILINE)
         except:
-            drScrolledMessageDialog.ShowMessage(self.parent, 'Regular Expression Error', "Seer Find")
+            sScrolledMessageDialog.ShowMessage(self.parent, 'Regular Expression Error', "Seer Find")
             return
 
         endpos = self.targetEnd
