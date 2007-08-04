@@ -3593,7 +3593,7 @@ class sFrame(wx.Frame):
 
         self.menuBar = wx.MenuBar()
         menuBarNamesWin32 = ["&File", "&Edit", "&Search", "&View", "&Program", "&Bookmarks",
-                          "D&rScript", "&Documents", "&Options", "&Help"]
+                          "&sScript", "&Documents", "&Options", "&Help"]
 
         menuBarNamesGtk = ["File", "Edit", "Search", "View", "Program", "Bookmarks",
                           "sScript", "Documents", "Options", "Help"]
