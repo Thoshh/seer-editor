@@ -35,14 +35,6 @@ def OnPopUp(stc, event):
             try:
                 if stc.grandparent.popupmenulist[x] == "<Separator>":
                     stc.PopUpMenu.AppendSeparator()
-                elif stc.grandparent.popupmenulist[x].find("<sScript>") > -1:
-                    label = stc.grandparent.popupmenulist[x][stc.grandparent.popupmenulist[x].find(":")+1:]
-                    try:
-                        i = stc.grandparent.sscriptmenu.titles.index(label)
-                        stc.PopUpMenu.Append(stc.grandparent.ID_SCRIPT_BASE+i, stc.grandparent.sscriptmenu.getsscriptmenulabel(label))
-                        stc.Bind(wx.EVT_MENU, stc.OnPopUpMenu, id=stc.grandparent.ID_SCRIPT_BASE+i)
-                    except:
-                        pass
                 elif stc.grandparent.popupmenulist[x].find("<Plugin>") > -1:
                     label = stc.grandparent.popupmenulist[x][stc.grandparent.popupmenulist[x].find(":")+1:]
                     try:
@@ -79,12 +71,6 @@ def OnPopUpMenu(stc, event):
                 i = stc.stclabelarray.index(label)
                 stc.CmdKeyExecute(stc.stcactionarray[i])
         else:
-            #sScript
-            try:
-                i = stc.grandparent.sscriptmenu.titles.index(label)
-                stc.grandparent.sscriptmenu.OnScript(event)
-            except:
-                pass
             #Plugins
             try:
                 i = stc.grandparent.PluginPopUpMenuLabels.index(label)

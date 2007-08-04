@@ -227,9 +227,6 @@ def GetPreferencesDictionary():
 ('findreplaceundercursor', 'find.replace.prompt.under.cursor', 1)],
 'Bookmarks': [('bookmarksstyle', 'bookmarks.style', 0)],
 'Plugins': [('pluginsdirectory', 'plugins.directory', 2)],
-'sScript': [('sscriptsdirectory', 'sscripts.directory', 2),
-('sscriptstyle', 'sscript.style', 0),
-('sscriptloadexamples', 'sscript.load.examples', 1)],
 'Printing': [('printdoclinenumbers', 'print.doc.linenumbers', 1),
 ('printpromptlinenumbers', 'print.prompt.linenumbers', 1),
 ('printtabwidth', 'print.tab.width', 1)],
@@ -489,14 +486,6 @@ class sPreferences:
         
         #Plugins Settings
         self.pluginsdirectory = os.path.join(preferencesdirectory, 'splugins').replace ('\\', "/")
-
-        #sScript Settings
-        self.sscriptsdirectory = os.path.join(preferencesdirectory, 'sscripts').replace ('\\', "/")
-        
-        self.sscriptstyle = "fore:#000000,back:#FFFFFF,size:12,face:fixed,bold"
-        if self.platform_is_windows:
-            self.sscriptstyle = "fore:#000000,back:#FFFFFF,size:8,face:Arial,bold"
-        self.sscriptloadexamples = 1
 
         #Printing Settings
         self.printdoclinenumbers = 1

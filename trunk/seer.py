@@ -26,10 +26,8 @@ from sPrompt import sPrompt
 from sPrinter import sPrinter
 from sFindReplaceDialog import sFindReplaceDialog
 from sBookmarksMenu import sBookmarksMenu
-from sScriptMenu import sScriptMenu
 from sPluginMenu import sPluginConfigureMenu, sPluginIndexMenu, sPluginAboutMenu, sPluginHelpMenu, sPluginPreferencesMenu
 import sGetBlockInfo
-# import sSourceBrowserGoTo
 import sFileDialog
 import sPrefsFile
 from sPreferences import sPreferences
@@ -37,7 +35,6 @@ import sShortcutsFile
 import sShortcuts
 import sToolBarFile
 import sTabNanny
-# from sSourceBrowser import sSourceBrowserPanel
 import sEncoding
 from sStyleDialog import sSeparatorDialog
 from sMenu import sMenu
@@ -90,7 +87,6 @@ class sFrame(wx.Frame):
 
         self.lastprogargs = ""
 
-        self.sScript = sObject()
         self.sPlugins = sObject()
 
         #Sets all image handlers.  Seer uses png, jpg, gif.
@@ -219,11 +215,7 @@ class sFrame(wx.Frame):
 
         self.ShortcutsActionArray = []
         self.ShortcutsArgumentsArray = []
-
-        #sScript Shortcuts
-        self.sScriptShortcuts = []
-        self.sScriptShortcutNames = []
-
+        
         #Plugins
         self.LoadedPlugins = []
         self.PluginModules = []
@@ -404,7 +396,6 @@ class sFrame(wx.Frame):
         self.Bind(wx.EVT_MENU,  self.OnViewInRightPanel, id=self.ID_VIEW_IN_RIGHT_PANEL)
         self.Bind(wx.EVT_MENU,  self.OnViewInTopPanel, id=self.ID_VIEW_IN_TOP_PANEL)
 
-        # self.Bind(wx.EVT_MENU,  self.OnToggleSourceBrowser, id=self.ID_TOGGLE_SOURCEBROWSER)
         self.Bind(wx.EVT_MENU,  self.OnToggleViewWhiteSpace, id=self.ID_TOGGLE_VIEWWHITESPACE)
         self.Bind(wx.EVT_MENU,  self.OnTogglePrompt, id=self.ID_TOGGLE_PROMPT)
 
@@ -420,7 +411,6 @@ class sFrame(wx.Frame):
         self.Bind(wx.EVT_MENU,  self.OnCustomizePopUpMenu, id=self.ID_POPUP)
         self.Bind(wx.EVT_MENU,  self.OnCustomizeToolBar, id=self.ID_CUSTOMIZE_TOOLBAR)
         self.Bind(wx.EVT_MENU,  self.OnEditBookmarks, id=self.ID_EDIT_BOOKMARKS)
-        self.Bind(wx.EVT_MENU,  self.OnEditScriptMenu, id=self.ID_EDIT_SCRIPT_MENU)
 
         self.Bind(wx.EVT_MENU,  self.OnViewAbout, id=self.ID_ABOUT)
         self.Bind(wx.EVT_MENU,  self.OnViewHelp, id=self.ID_HELP)
@@ -676,9 +666,6 @@ class sFrame(wx.Frame):
             stc.CmdKeyExecute(wx.stc.STC_CMD_CUT)
         elif objid == self.ID_DELETE:
             stc.CmdKeyExecute(wx.stc.STC_CMD_CLEAR)
-
-    def dynamicsscript(self, event):
-        self.sscriptmenu.OnDynamicScript(event)
 
     def Execute(self, command, statustext = ''):
         if not statustext:
@@ -970,7 +957,6 @@ class sFrame(wx.Frame):
         self.ID_PLUGIN_ABOUT = 4053
 
         self.ID_EDIT_BOOKMARKS = 301
-        self.ID_EDIT_SCRIPT_MENU = 3004
 
         self.ID_ABOUT = 140
         self.ID_HELP = 141
@@ -983,8 +969,6 @@ class sFrame(wx.Frame):
         self.ID_RECENT_FILES_BASE = 9930
 
         self.ID_RECENT_SESSIONS_BASE = 8330
-
-        self.ID_SCRIPT_BASE = 7500
 
         #STC Shortcut List:
         self.STCCOMMANDLIST = sShortcuts.GetSTCCommandList()
@@ -1138,11 +1122,6 @@ class sFrame(wx.Frame):
         self.pluginsdirectory = self.prefs.pluginsdirectory
         sys.path.append(self.pluginsdirectory)
 
-        #sscripts code directory
-        if not os.path.exists(self.prefs.sscriptsdirectory):
-            os.mkdir(self.prefs.sscriptsdirectory)
-        self.sscriptsdirectory = self.prefs.sscriptsdirectory
-
         #dat directory
         self.datdirectory = os.path.join(self.preferencesdirectory, 'dat')
         if not os.path.exists(self.datdirectory):
@@ -1233,15 +1212,6 @@ class sFrame(wx.Frame):
                 self.ShowMessage(("Error with: " + shortcutsfile + "\nSeer will load the program defaults."),
                                   "Shortcuts Error")
                 self.LoadShortcuts(True)
-
-        #Load sScript Shortcuts
-        sscriptsshortcutsfile = self.shortcutsdirectory + "/sscript.shortcuts.dat"
-        if os.path.exists(sscriptsshortcutsfile) and (not UseDefault):
-            try:
-                self.sScriptShortcuts, self.sScriptShortcutNames, t = sShortcutsFile.ReadShortcuts(sscriptsshortcutsfile, 0)
-            except:
-                self.ShowMessage(("Error with: " + sscriptsshortcutsfile + "\nSeer will not load sScript shortcuts."),
-                                  "sScript Shortcuts Error")
 
     def OnActivate(self):
         if self.prefs.docautoreload:
@@ -1691,13 +1661,6 @@ class sFrame(wx.Frame):
         d.ShowModal()
         d.Destroy()
         self.bookmarksmenu.reloadBookmarks()
-
-    def OnEditScriptMenu(self, event):
-        from sScriptDialog import sScriptDialog
-        d = sScriptDialog(self)
-        d.ShowModal()
-        d.Destroy()
-        self.sscriptmenu.reloadscripts()
 
     def OnEnd(self, event):
         if self.txtPrompt.pid != -1:
@@ -3279,10 +3242,6 @@ class sFrame(wx.Frame):
             self.FindOptions = []
             self.ReplaceOptions = []
 
-        #sScript:
-        if self.prefs.sscriptloadexamples != oldprefs.sscriptloadexamples:
-            self.sscriptmenu.reloadscripts()
-
         #Toolbar
         if self.prefs.iconsize > 0:
             if self.hasToolBar:
@@ -3550,12 +3509,8 @@ class sFrame(wx.Frame):
         self.programmenu.Append(self.ID_VIEW_PYDOC, self.getmenulabel('Browse PyDoc...'))
 
         self.bookmarksmenu = sBookmarksMenu(self)
-        self.sscriptmenu = sScriptMenu(self)
 
         self.txtDocument.OnModified(None)
-
-        #sScript Shortcuts
-        self.sScriptShortcutsAction = self.sscriptmenu.OnScript
 
         self.pluginsconfiguremenu = sPluginConfigureMenu(self)
         self.pluginsindexmenu = sPluginIndexMenu(self)
@@ -3571,7 +3526,6 @@ class sFrame(wx.Frame):
         self.optionsmenu.Append(self.ID_CUSTOMIZE_TOOLBAR, 'Customize ToolBar', True)
         self.optionsmenu.AppendSeparator()
         self.optionsmenu.Append(self.ID_EDIT_BOOKMARKS, 'Edit Bookmarks', True, 0)
-        self.optionsmenu.Append(self.ID_EDIT_SCRIPT_MENU, 'Edit Script Menu', True)
         self.optionsmenu.AppendSeparator()
         self.optionsmenu.AppendMenu(self.ID_CONFIGURE_PLUGINS, "&Configure Plugins", self.pluginsconfiguremenu)
         self.optionsmenu.AppendMenu(self.ID_PLUGIN_PREFS, "Plugin Preferences", self.pluginsprefsmenu)
@@ -3593,10 +3547,10 @@ class sFrame(wx.Frame):
 
         self.menuBar = wx.MenuBar()
         menuBarNamesWin32 = ["&File", "&Edit", "&Search", "&View", "&Program", "&Bookmarks",
-                          "&sScript", "&Documents", "&Options", "&Help"]
+                          "&Documents", "&Options", "&Help"]
 
         menuBarNamesGtk = ["File", "Edit", "Search", "View", "Program", "Bookmarks",
-                          "sScript", "Documents", "Options", "Help"]
+                         "Documents", "Options", "Help"]
         if self.PLATFORM_IS_WIN:
             menuBarNames = menuBarNamesWin32
         else:
@@ -3608,10 +3562,9 @@ class sFrame(wx.Frame):
         self.menuBar.Append(self.viewmenu, menuBarNames[3])
         self.menuBar.Append(self.programmenu, menuBarNames[4])
         self.menuBar.Append(self.bookmarksmenu, menuBarNames[5])
-        self.menuBar.Append(self.sscriptmenu, menuBarNames[6])
-        self.menuBar.Append(self.documentsmenu, menuBarNames[7])
-        self.menuBar.Append(self.optionsmenu, menuBarNames[8])
-        self.menuBar.Append(self.helpmenu, menuBarNames[9])
+        self.menuBar.Append(self.documentsmenu, menuBarNames[6])
+        self.menuBar.Append(self.optionsmenu, menuBarNames[7])
+        self.menuBar.Append(self.helpmenu, menuBarNames[8])
 
         self.SetMenuBar(self.menuBar)
         self.SetToolbar()

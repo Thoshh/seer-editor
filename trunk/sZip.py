@@ -20,8 +20,7 @@
 #to / from zip files really easy.
 
 #Targets are prefs directory,
-#creating a directory structure from the sscript menu
-#an all plugins.
+#creating a directory structure from the plugins.
 
 import os, zipfile, string, tempfile
 from sPrefsFile import ExtractPreferenceFromText
@@ -36,65 +35,6 @@ def AddDirectoryToZipFile(directory, dirname, zip):
             AddDirectoryToZipFile(absitem, zipitem, zip)
         else:
             zip.write(absitem, zipitem)
-
-def AddsScriptsToZipFile(prefdir, zip):
-    scriptfile = prefdir + "/sscript.dat"
-
-    if os.path.exists(scriptfile):
-        newlines = []
-
-        dirstrings = ['sscripts']
-        lastCount = 0
-        #Read from the file
-        f = open(scriptfile, 'rb')
-        #Initialize
-        line = f.readline()
-        while line:
-            c = line.count('\t')
-            indentationstring = line[:c]
-            line = line[c:].rstrip()
-            while lastCount > c:
-                dirstrings.pop()
-                lastCount = lastCount - 1
-
-            if line[0] == '>':
-                dirstrings.append(line[1:])
-                newlines.append(indentationstring + line)
-                c = c + 1
-            else:
-                line_path = ExtractPreferenceFromText(line, "path")
-                line_title = ExtractPreferenceFromText(line, "title")
-
-                line_filename = os.path.basename(line_path)
-
-                if os.path.exists(line_path):
-                    zippath = string.join(dirstrings, '/')
-                    zipname = os.path.join(zippath, line_filename)
-                    zip.write(line_path, zipname)
-                    newlines.append(indentationstring + '<path>' + zipname + '</path><title>' + line_title + '</title>')
-
-            lastCount = c
-            line = f.readline()
-        f.close()
-
-
-        #Add the edited Script File:
-        newtext = string.join(newlines, '\n')
-
-        tsscript = tempfile.mktemp()
-
-        f = file(tsscript, 'wb')
-        f.write(newtext)
-        f.close()
-
-        zip.write(tsscript, 'sscript.dat')
-
-        #Remove the temporary file:
-        os.remove(tsscript)
-
-        #Add Shortcuts
-        zip.write(prefdir + "/sscript.shortcuts.dat", 'sscript.shortcuts.dat')
-
 
 def CreateDirectories(targetdir, zippedfilename):
     zippedfilename = zippedfilename.replace('\\', '/')
@@ -114,23 +54,13 @@ def ExportDirectoryTo(targetdirectory, filename, ziproot = ''):
 
     zf.close()
 
-def ExportsScriptsTo(prefdir, filename):
-    zf = zipfile.ZipFile(filename, 'w')
-
-    AddsScriptsToZipFile(prefdir, zf)
-
-    zf.close()
-
 def ExportPreferencesTo(pluginsdirectory, prefdir, shortcutsdir, datdirectory, filename,
-                        shortcuts = True, popupmenu = True, toolbar = True, plugins = True, sscripts = True):
+                        shortcuts = True, popupmenu = True, toolbar = True, plugins = True):
     zf = zipfile.ZipFile(filename, 'w')
 
     #Add Plugins
     if plugins:
         AddDirectoryToZipFile(pluginsdirectory, '', zf)
-
-    if sscripts:
-        AddsScriptsToZipFile(prefdir, zf)
 
     #Add Preferences
     zf.write(prefdir + "/preferences.dat", 'preferences.dat')
@@ -150,54 +80,8 @@ def ExportPreferencesTo(pluginsdirectory, prefdir, shortcutsdir, datdirectory, f
 
     zf.close()
 
-
-
-def ImportsScriptsFrom(prefdir, filename):
-    UnPackIf(prefdir, filename, 'sscript')
-    SetupImportedsScripts(prefdir)
-
 def ImportPluginsFrom(prefdir, filename):
     UnPackIf(prefdir, filename, 'plugins')
-
-def ImportPreferencesFrom(prefdir, filename):
-    UnPack(prefdir, filename)
-    SetupImportedsScripts(prefdir)
-
-def ImportJustPreferencesFrom(prefdir, filename):
-    UnPackJustPreferences(prefdir, filename)
-    SetupImportedsScripts(prefdir)
-
-def SetupImportedsScripts(prefdir):
-    scriptfile = prefdir + "/sscript.dat"
-
-    if os.path.exists(scriptfile):
-
-        #Read from the file
-        f = open(scriptfile, 'rb')
-        lines = f.readlines()
-        f.close()
-
-        newlines = []
-
-        for line in lines:
-            c = line.count('\t')
-            identationstring =  line[:c]
-
-            if line[0] != '>':
-
-                line_path = ExtractPreferenceFromText(line, "path")
-                line_title = ExtractPreferenceFromText(line, "title")
-
-                new_path = os.path.join(prefdir, line_path)
-
-                if os.path.exists(new_path):
-                    newlines.append(identationstring + '<path>' + new_path + '</path><title>' + line_title + '</title>\n')
-            else:
-                newlines.append(identationstring + line)
-
-        f = open(scriptfile, 'wb')
-        f.writelines(newlines)
-        f.close()
 
 def UnPack(targetdirectory, filename, label=''):
     zf = zipfile.ZipFile(filename, 'r')

@@ -574,11 +574,6 @@ def SetShortcuts(frame, Shortcuts, ShortcutNames, useDefault=0):
             shortcutsActionArray.append(frame.OnClosePrompt)
             shortcutsArgumentsArray.append("frame, event")
 
-        #sScript
-        elif(ShortcutNames[x] == "Dynamic sScript"):
-            shortcutsActionArray.append(frame.dynamicsscript)
-            shortcutsArgumentsArray.append("frame, event")
-
         #Prefs
         elif(ShortcutNames[x] == "Preferences"):
             shortcutsActionArray.append(frame.OnPrefs)
@@ -651,7 +646,6 @@ def RunShortcuts(frame, event, stc, SplitView):
 
     sstc = -1
     seer = -1
-    sscript = -1
     plugin = -1
 
     if strkeycode in frame.PluginShortcuts:
@@ -660,8 +654,6 @@ def RunShortcuts(frame, event, stc, SplitView):
         sstc = frame.STCShortcuts.index(strkeycode)
     elif strkeycode in frame.Shortcuts:
         seer = frame.Shortcuts.index(strkeycode)
-    elif strkeycode in frame.sScriptShortcuts:
-        sscript = frame.sScriptShortcuts.index(strkeycode)
 
     if plugin > -1:
         r = frame.PluginAction[plugin](event)
@@ -681,7 +673,7 @@ def RunShortcuts(frame, event, stc, SplitView):
     elif frame.STCCOMMANDLIST[sstc] == wx.stc.STC_CMD_DELETEBACK:
         return wx.stc.STC_CMD_DELETEBACK
 
-    if sstc > -1 and (not seer > -1) and (not sscript > -1):
+    if sstc > -1 and (not seer > -1):
         try:
             if frame.STCCOMMANDLIST[sstc] == wx.stc.STC_CMD_PASTE:
                 stc.Paste()
@@ -692,7 +684,7 @@ def RunShortcuts(frame, event, stc, SplitView):
         return frame.STCCOMMANDLIST[sstc]
     if SplitView:
         return -1
-    if seer > -1 and (not sscript > -1) and (not sstc > -1):
+    if seer > -1 and (not sstc > -1):
         if frame.ShortcutsArgumentsArray[seer] == "frame, event":
             frame.ShortcutsActionArray[seer](event)
         elif frame.ShortcutsArgumentsArray[seer] == "maximize":
@@ -700,10 +692,6 @@ def RunShortcuts(frame, event, stc, SplitView):
                 frame.ShortcutsActionArray[seer](not frame.IsMaximized())
             except:
                 pass
-        return -1
-    if sscript > -1 and (not seer > -1) and (not sstc > -1):
-        event.SetId(frame.ID_SCRIPT_BASE + sscript)
-        frame.sScriptShortcutsAction(event)
         return -1
 
     event.Skip()

@@ -30,7 +30,7 @@ def GetShortcutList():
     "Close Prompt",
     "Comment", "Customize Shortcuts",
     "Customize Pop Up Menu", "Customize ToolBar", "Dedent",
-    "Dynamic sScript", "End", "Exit", "Expand All", "Find",
+    "End", "Exit", "Expand All", "Find",
     "Find And Complete", "Find Next",
     "Find Previous", "First Document", "Fold All", "Go To",
     "Go To Block End", "Go To Block Start",

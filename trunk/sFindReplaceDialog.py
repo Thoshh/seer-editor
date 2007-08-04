@@ -26,7 +26,6 @@ import re
 
 class sFinder:
     def __init__(self, parent, stc, oldfinder=None):
-    #end limodou
         self.parent = parent
         self.stc = stc
         self.reset()

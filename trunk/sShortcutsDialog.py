@@ -148,10 +148,8 @@ class sShortcutPanel(wx.Panel):
                 takenby = self.parent.parent.ShortcutNames[self.parent.ShortcutsArray[alreadytaken].index(newv)]
             elif alreadytaken == 1:
                 takenby = self.parent.parent.STCShortcutNames[self.parent.ShortcutsArray[alreadytaken].index(newv)]
-            elif alreadytaken == 2:
-                takenby = self.parent.parent.sScriptShortcutNames[self.parent.ShortcutsArray[alreadytaken].index(newv)]
             else:
-                takenby = self.parent.PluginShortcutNameList[alreadytaken-3][self.parent.ShortcutsArray[alreadytaken].index(newv)]
+                takenby = self.parent.PluginShortcutNameList[alreadytaken-2][self.parent.ShortcutsArray[alreadytaken].index(newv)]
             sScrolledMessageDialog.ShowMessage(self, ('The Shortcut "' + newv + \
             '"\nis already being used by "' + takenby + '".\nSeer will politely ignore your request.'),\
             "Shortcut Already Taken")
@@ -234,17 +232,11 @@ class sShortcutsDialog(wx.Dialog):
 
         self.ShortcutsArray[1] = list(self.parent.STCShortcuts)
 
-        #sScript
-
-        self.ShortcutsArray[2] = list(self.parent.sScriptShortcuts)
-
-        self.ShortcutsArrayPos = 0
-
         #Plugins
 
         self.LoadPluginShortcutList()
 
-        self.ShortcutList = ["Standard", "Text Control", "sScript"]
+        self.ShortcutList = ["Standard", "Text Control"]
         self.ShortcutList.extend(self.PluginList)
 
         self.cboList = wx.ComboBox(self, self.ID_LIST, "Standard", wx.DefaultPosition, (200, -1), self.ShortcutList, wx.CB_DROPDOWN|wx.CB_READONLY)
@@ -472,14 +464,6 @@ class sShortcutsDialog(wx.Dialog):
             sScrolledMessageDialog.ShowMessage(self, ("There were some problems writing to:\n"  + shortcutsfile + "\nEither the file is having metaphysical issues, or you do not have permission to write.\nFor metaphysical issues, consult the documentation.\nFor permission issues, change the permissions on the directory to allow yourself write access.\nSeer will now politely ignore your request to save.\nTry again when you have fixed the problem."), "Write Error")
             return
 
-        #sScripts
-        shortcutsfile = self.shortcutsdirectory + "/sscript.shortcuts.dat"
-        try:
-            sShortcutsFile.WriteShortcuts(shortcutsfile, self.ShortcutsArray[2], self.parent.sScriptShortcutNames, "", False)
-        except:
-            sScrolledMessageDialog.ShowMessage(self, ("There were some problems writing to:\n"  + shortcutsfile + "\nEither the file is having metaphysical issues, or you do not have permission to write.\nFor metaphysical issues, consult the documentation.\nFor permission issues, change the permissions on the directory to allow yourself write access.\nSeer will now politely ignore your request to save.\nTry again when you have fixed the problem."), "Write Error")
-            return
-
         #Plugins
         x = 3
         l = len(self.ShortcutsArray)
@@ -519,11 +503,8 @@ class sShortcutsDialog(wx.Dialog):
         elif sel == 1:
             names = self.parent.STCShortcutNames
 
-        elif sel == 2:
-            names = self.parent.sScriptShortcutNames
-
         else:
-            names = self.PluginShortcutNameList[sel-3]
+            names = self.PluginShortcutNameList[sel-2]
 
         self.boxShortcuts.Set(names)
 
@@ -536,7 +517,6 @@ class sShortcutsDialog(wx.Dialog):
 
         self.parent.Shortcuts = self.ShortcutsArray[0]
         self.parent.STCShortcuts = self.ShortcutsArray[1]
-        self.parent.sScriptShortcuts = self.ShortcutsArray[2]
 
         self.parent.ShortcutsActionArray = []
         self.parent.ShortcutsArgumentsArray = []

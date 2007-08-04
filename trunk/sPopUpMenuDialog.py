@@ -108,19 +108,6 @@ class sPopUpMenuDialog(wx.Dialog):
         stclist.insert(0, "<Insert Separator>")
         self.ListArray.append(stclist)
 
-        #sScript
-
-        sscriptlist = []
-        map(sscriptlist.append, parent.sscriptmenu.titles)
-        x = 0
-        l = len(sscriptlist)
-        while x < l:
-            sscriptlist[x] = "<sScript>:" + sscriptlist[x]
-            x = x + 1
-        sscriptlist.insert(0, "<Insert Separator>")
-
-        self.ListArray.append(sscriptlist)
-
         #Plugins
         plist = os.listdir(parent.pluginsdirectory)
 
@@ -151,7 +138,7 @@ class sPopUpMenuDialog(wx.Dialog):
             i = self.PluginList.index(popl)
             self.PluginList.pop(i)
 
-        list = ["Standard", "Text Control", "sScript"]
+        list = ["Standard", "Text Control"]
         list.extend(self.PluginList)
 
         self.cboList = wx.ComboBox(self, self.ID_LIST, "Standard", wx.DefaultPosition, (200, -1), list, wx.CB_DROPDOWN|wx.CB_READONLY)

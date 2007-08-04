@@ -210,9 +210,6 @@ def SetupToolBar(frame):
             elif frame.ToolBarList[x] == "Find And Complete":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_FIND_AND_COMPLETE, x))
 
-            elif frame.ToolBarList[x] == "Dynamic sScript":
-                ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.sscriptmenu.ID_DYNAMIC_SCRIPT, x))
-
             elif frame.ToolBarList[x] == "Copy":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_COPY, x))
             elif frame.ToolBarList[x] == "Cut":
@@ -289,13 +286,6 @@ def SetupToolBar(frame):
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_REHOWTO_DOCS, x))
             elif frame.ToolBarList[x] == "Import All":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_IMPORT_ALL, x))
-            elif frame.ToolBarList[x].find("<sScript>:") > -1:
-                try:
-                    title = frame.ToolBarList[x][frame.ToolBarList[x].find("<sScript>:")+11:]
-                    i = frame.sscriptmenu.titles.index(title)
-                    ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.sscriptmenu.ID_SCRIPT_BASE+i, x, title))
-                except:
-                    pass
             elif frame.ToolBarList[x].find("<Plugin>:") > -1:
                 try:
                     title = frame.ToolBarList[x][frame.ToolBarList[x].find("<Plugin>:")+9:]

@@ -418,47 +418,6 @@ class DragAndDropPanel(PrefsPanel):
         self.raddraganddropmode.SetSelection(self.grandparent.prefs.draganddropmode)
         self.raddraganddroptextmode.SetSelection(self.grandparent.prefs.draganddroptextmode)
 
-class sScriptPanel(PrefsPanel):
-
-    def __init__(self, parent, id, name):
-
-        PrefsPanel.__init__(self, parent, id, name, 2)
-
-        self.txtdefaultdirectory = wx.TextCtrl(self, -1, self.grandparent.prefs.sscriptsdirectory,  wx.Point(15, 325), wx.Size(250, -1))
-        self.sScriptbtnBrowse = wx.Button(self, self.grandparent.ID_sSCRIPT_BROWSE, " &Browse ")
-        self.btnDStyle = wx.Button(self, self.grandparent.ID_sSCRIPT_STYLE, " Edit sScript Style ")
-        self.chkloadexamples = wx.CheckBox(self, -1, "")
-
-        self.Add(self.btnDStyle)
-        self.AddLabel("Default Directory:")
-        self.AddTwoItems(self.txtdefaultdirectory, self.sScriptbtnBrowse)
-        self.Add(self.chkloadexamples, "Load Example Scripts:")
-
-        self.SetPanelSizer()
-
-        self.reset()
-
-        self.Bind(wx.EVT_BUTTON,  self.OnbtnDBrowse, id=self.grandparent.ID_sSCRIPT_BROWSE)
-        self.Bind(wx.EVT_BUTTON,  self.OnbtnDStyle, id=self.grandparent.ID_sSCRIPT_STYLE)
-
-    def reset(self):
-        self.txtdefaultdirectory.SetValue(self.grandparent.prefs.sscriptsdirectory)
-        self.chkloadexamples.SetValue(self.grandparent.prefs.sscriptloadexamples)
-
-    def OnbtnDBrowse(self, event):
-        d = wx.DirDialog(self, "Select Default Directory For sScript:", style=wx.DD_DEFAULT_STYLE|wx.DD_NEW_DIR_BUTTON|wx.MAXIMIZE_BOX|wx.THICK_FRAME)
-        if d.ShowModal() == wx.ID_OK:
-            self.txtdefaultdirectory.SetValue(d.GetPath())
-        d.Destroy()
-
-    def OnbtnDStyle(self, event):
-        d = sSimpleStyleDialog(self, -1, ("Style: sScript"), self.grandparent.prefs.sscriptstyle, self.grandparent.prefs.sscriptstyle)
-
-        d.ShowModal()
-        if d.ClickedOk():
-            self.grandparent.prefs.sscriptstyle = d.GetStyleString()
-        d.Destroy()
-
 class FileDialogPanel(PrefsPanel):
 
     def __init__(self, parent, id, name):
@@ -797,7 +756,7 @@ class GeneralPanel(PrefsPanel):
     def OnbtnExportPrefs(self, event):
         import sZip
         import zipfile
-        dlg = sFileDialog.FileDialog(self.sframe, "Export Preferences, Plugins, and sScripts To", 'Zip File (*.zip)|*.zip', IsASaveDialog=True)
+        dlg = sFileDialog.FileDialog(self.sframe, "Export Preferences, And Plugins To", 'Zip File (*.zip)|*.zip', IsASaveDialog=True)
         if dlg.ShowModal() == wx.ID_OK:
             filename = dlg.GetPath().replace("\\", "/")
             if filename.endswith('.zip')==False: #AB: bug of sFileDialog
@@ -809,12 +768,12 @@ class GeneralPanel(PrefsPanel):
 
     def OnbtnImportPrefs(self, event):
         import sZip
-        if self.sframe.Ask('This will permanently overwrite all of your preferences, plugins, and sscript file.\n\nProceed?', 'Warning'):
-            dlg = sFileDialog.FileDialog(self.sframe, "Import Preferences, Plugins, and sScripts From", 'Zip File (*.zip)|*.zip')
+        if self.sframe.Ask('This will permanently overwrite all of your preferences and plugins file.\n\nProceed?', 'Warning'):
+            dlg = sFileDialog.FileDialog(self.sframe, "Import Preferences and Plugins From", 'Zip File (*.zip)|*.zip')
             if dlg.ShowModal() == wx.ID_OK:
                 filename = dlg.GetPath().replace("\\", "/")
                 sZip.ImportPreferencesFrom(self.sframe.preferencesdirectory, filename)
-                self.sframe.ShowMessage('Successfully imported preferences, plugins, and sscripts.', 'Import Success')
+                self.sframe.ShowMessage('Successfully imported preferences and plugins.', 'Import Success')
 
             dlg.Destroy()
 
@@ -1173,8 +1132,6 @@ class sPrefsDialog(wx.Dialog):
         self.ID_PROMPT_APPLY_PROPERTY = 118
         self.ID_CLASS_BROWSER_STYLE = 201
         self.ID_BOOKMARKS_STYLE = 202
-        self.ID_sSCRIPT_STYLE = 203
-        self.ID_sSCRIPT_BROWSE = 211
         self.ID_PLUGINS_BROWSE = 212
         self.ID_PRINT_TAB_WIDTH = 251
         self.ID_DOCUMENTATION_BROWSE = 231
@@ -1205,7 +1162,6 @@ class sPrefsDialog(wx.Dialog):
         self.pnlDocument = DocumentPanel(self.lbPrefs, -1, "Document")
         self.pnlDocumentation = DocumentationPanel(self.lbPrefs, -1, "Documentation")
         self.pnlDragAndDrop = DragAndDropPanel(self.lbPrefs, -1, "Drag and Drop")
-        self.pnlsScript = sScriptPanel(self.lbPrefs, -1, "sScript")
         self.pnlFileDialog = FileDialogPanel(self.lbPrefs, -1, "File Dialog")
         self.pnlFileTypes = FileTypesPanel(self.lbPrefs, -1, "File Types")
         self.pnlFindReplace = FindReplacePanel(self.lbPrefs, -1, "Find/Replace")
@@ -1213,14 +1169,12 @@ class sPrefsDialog(wx.Dialog):
         self.pnlPrint = PrintPanel(self.lbPrefs, -1, "Printing")
         self.pnlPrompt = PromptPanel(self.lbPrefs, -1, "Prompt")
         self.pnlSidePanels = SidePanelPanel(self.lbPrefs, -1, "Side Panels")
-        #self.pnlSourceBrowser = SourceBrowserPanel(self.lbPrefs, -1, "Source Browser")
 
         self.lbPrefs.AddPage(self.pnlGeneral, "General")
         self.lbPrefs.AddPage(self.pnlBookmarks, "Bookmarks")
         self.lbPrefs.AddPage(self.pnlDocument, "Document")
         self.lbPrefs.AddPage(self.pnlDocumentation, "Documentation")
         self.lbPrefs.AddPage(self.pnlDragAndDrop, "Drag And Drop")
-        self.lbPrefs.AddPage(self.pnlsScript, "sScript")
         self.lbPrefs.AddPage(self.pnlFileDialog, "File Dialog")
         self.lbPrefs.AddPage(self.pnlFileTypes, "File Types")
         self.lbPrefs.AddPage(self.pnlFindReplace, "Find/Replace")
@@ -1228,7 +1182,6 @@ class sPrefsDialog(wx.Dialog):
         self.lbPrefs.AddPage(self.pnlPrint, "Printing")
         self.lbPrefs.AddPage(self.pnlPrompt, "Prompt")
         self.lbPrefs.AddPage(self.pnlSidePanels, "Side Panels")
-        #self.lbPrefs.AddPage(self.pnlSourceBrowser, "Source Browser")
 
 
         self.lbPrefs.ShowPanel(parent.prefdialogposition)
@@ -1289,10 +1242,8 @@ class sPrefsDialog(wx.Dialog):
         answer = wx.MessageBox("This will reset all preferences to the program default.\n(You still need to click update and/or save)\nAre you sure you want to do this?", "Reset Preferences", wx.YES_NO | wx.ICON_QUESTION)
         if answer == wx.YES:
             self.prefs.reset()
-            #self.pnlSourceBrowser.reset()
             self.pnlDocument.reset()
             self.pnlDocumentation.reset()
-            self.pnlsScript.reset()
             self.pnlFindReplace.reset()
             self.pnlFileTypes.reset()
             self.pnlGeneral.reset()
@@ -1359,20 +1310,6 @@ class sPrefsDialog(wx.Dialog):
 
         #Plugins
         self.prefs.pluginsdirectory = self.pnlPlugins.txtdefaultdirectory.GetValue().replace('\\', '/')
-
-        #sScript
-        self.prefs.sscriptsdirectory = self.pnlsScript.txtdefaultdirectory.GetValue().replace('\\', '/')
-        self.parent.SetSeerDirectories()
-
-
-        self.prefs.sscriptloadexamples = int(self.pnlsScript.chkloadexamples.GetValue())
-        
-        self.prefs.enablefeedback = int(self.pnlGeneral.chkenablefeedback.GetValue())
-        self.prefs.alwayspromptonexit = int(self.pnlGeneral.chkalwayspromptonexit.GetValue())
-        self.prefs.backupfileonsave = int(self.pnlGeneral.chkbackupfileonsave.GetValue())
-        self.prefs.checkindentation = int(self.pnlGeneral.chkcheckindentation.GetValue())
-        self.prefs.checkeol = int(self.pnlGeneral.chkCheckFormat.GetValue())
-        self.prefs.vieweol = int(self.pnlGeneral.chkvieweol.GetValue())
 
         #Drag and Drop
         self.prefs.draganddropmode = self.pnlDragAndDrop.raddraganddropmode.GetSelection()

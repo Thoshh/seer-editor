@@ -75,7 +75,6 @@ name=description[0].split(' ', 1)[0]
 # please add every package data file to be installed to the list
 DATA = [
     'documentation/*',
-    'examples/sScript/*',
     'bitmaps/*.ico', 'bitmaps/*.png',
     'bitmaps/16/*.png', 'bitmaps/24/*.png',
     # adding runner scripts, TODO: seer startup should be probably redone
