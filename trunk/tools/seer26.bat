@@ -1,1 +1,0 @@
-python ..\seer_wx26.py
