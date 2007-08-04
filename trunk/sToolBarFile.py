@@ -28,8 +28,8 @@ def getToolBarList(datdirectory):
         return ["New", "Open", "Reload File", "Close", "Save", \
         "<Separator>", "Print File", "Print Prompt", \
         "<Separator>", "Find", "Replace", \
-        "<Separator>", "<Separator>", "Preferences", "Toggle Prompt", "Toggle View Whitespace", \
-        "<Separator>", "<Separator>", "<Separator>", "Check Syntax", "Run", "Set Arguments", "Python", \
+        "<Separator>",  "Preferences", "Toggle Prompt", "Toggle View Whitespace", \
+        "<Separator>",  "Check Syntax", "Run", "Set Arguments", "Python", \
         "End", "Import All"]
     ToolBarList = []
     f = file(toolbarfile, 'r')

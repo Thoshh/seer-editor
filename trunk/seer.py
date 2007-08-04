@@ -130,7 +130,6 @@ class sFrame(wx.Frame):
 
         #Preferences
 
-
         self.prefs = sPreferences(self.PLATFORM_IS_WIN, self.programdirectory)
         self.prefsfile = self.preferencesdirectory + "/preferences.dat"
 
@@ -198,7 +197,6 @@ class sFrame(wx.Frame):
         self.promptnotebook.SetPageImage(0, 2)
 
         #Pop Up Menu
-
         self.popupmenulist = []
 
         self.LoadPopUpFile()
@@ -212,7 +210,6 @@ class sFrame(wx.Frame):
         self.lastprogargsArray = [self.lastprogargs]
 
         #Shortcuts
-
         self.STCShortcuts = sShortcutsFile.GetDefaultSTCShortcuts()
         self.STCShortcutNames = sShortcutsFile.GetSTCShortcutList()
         self.STCShortcutsArgumentArray = sShortcuts.GetSTCCommandList()
@@ -224,7 +221,6 @@ class sFrame(wx.Frame):
         self.ShortcutsArgumentsArray = []
 
         #sScript Shortcuts
-
         self.sScriptShortcuts = []
         self.sScriptShortcutNames = []
 
@@ -267,7 +263,6 @@ class sFrame(wx.Frame):
         self.PluginToolBarFunctions = []
 
         #Load Shortcuts
-
         self.STCUseDefault = 1
         self.ShortcutsUseDefault = 1
 
@@ -293,15 +288,12 @@ class sFrame(wx.Frame):
         self.reimport = re.compile('^\s*?import\s+?.*?$', re.M)
         self.refromimport = re.compile('^\s*?from\s+?.*?import.*?$', re.M)
 
-        #edited by seer
         if self.prefs.defaultdirectory:
             self.ddirectory = self.prefs.defaultdirectory
         else:
-            #add limodou 2004/04/17
             #if defaultdirectory is empty, then use the last recently file's dir
             if self.recentfiles:
                 self.ddirectory = os.path.dirname(self.recentfiles[0])
-            #end limodou
             else:
                 self.ddirectory = self.programdirectory
 
@@ -314,12 +306,9 @@ class sFrame(wx.Frame):
 
         self.txtDocument.OnModified(None)
 
-        #sScript Shortcuts
-
         self.hasToolBar = False
 
         #Status Bar
-
         self.CreateStatusBar()
 
         self.GetStatusBar().SetFieldsCount(3)
@@ -328,13 +317,11 @@ class sFrame(wx.Frame):
         self.GetStatusBar().SetStatusWidths([-0, -6, -4])
 
         self.CreateMenus()
+        
         #Sizer
-
         self.bSizer.Add(self.mainpanel, 1, wx.EXPAND)
         self.SetAutoLayout(True)
         self.SetSizer(self.bSizer)
-
-
 
         self.UpdateMenuAndToolbar()
 
@@ -1000,15 +987,12 @@ class sFrame(wx.Frame):
         self.ID_SCRIPT_BASE = 7500
 
         #STC Shortcut List:
-
         self.STCCOMMANDLIST = sShortcuts.GetSTCCommandList()
 
         #System constants
-
         self.PLATFORM_IS_WIN = (sys.platform == "win32")
 
         #Preferences Directory Initial Setup:
-
         self.userhomedirectory = wx.StandardPaths.Get().GetUserConfigDir().replace('\\', '/')
         if not self.preferencesdirectory:
 
@@ -1905,7 +1889,6 @@ class sFrame(wx.Frame):
             self.txtDocument.SetModEventMask(mask)
             return
 
-        #Submitted Patch:  Christian Daven
         self.txtDocument.Tab()
         self.txtDocument.SetModEventMask(mask)
 
@@ -2848,14 +2831,10 @@ class sFrame(wx.Frame):
         except:
             self.ShowMessage(("Error Opening: " + filename), "Seer Error")
 
-        #The following chunk of code is an ugly way to work around a bug in wx.STC.
-        #As things stand, word wrap may not update on file load.
-        #This fixes the problem, by forcing seer to reset the wx.STC instances.
         if self.prefs.docwordwrap:
             x, y = self.GetSizeTuple()
             self.SetSize(wx.Size(x+1, y+1))
             self.SetSize(wx.Size(x, y))
-        #End of the chunk.
 
         self.reloaddocumentsmenu()
 
@@ -3150,7 +3129,6 @@ class sFrame(wx.Frame):
         sortedtitles = map(_x, indextitles)
 
         sortedtitles.sort()
-
         #End Sort
 
         x = 0
@@ -3489,13 +3467,9 @@ class sFrame(wx.Frame):
         self.editmenu.Append(self.ID_REDO, 'Redo', False, 1)
         self.editmenu.AppendSeparator()
 
-        #Order changed by seer
-        ##for keyboard macro (Keyboardmacro) recording; #ugly hack franz # removed again
-
         self.editmenu.Append(self.ID_CUT, 'Cut')
         self.editmenu.Append(self.ID_COPY, 'Copy')
         self.editmenu.Append(self.ID_PASTE, 'Paste')
-        ##end patch keyboard macro recording #end ugly hack franz # removed again
 
         self.editmenu.Append(self.ID_DELETE, 'Delete')
 
