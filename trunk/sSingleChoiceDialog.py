@@ -19,9 +19,6 @@
 
 import wx
 
-#*******************************************************************************************************
-
-
 class sSingleChoiceDialog(wx.Dialog):
     def __init__(self, parent, title, choices, sort=True, point=wx.DefaultPosition, size=(250, 300), SetSizer=True):
         wx.Dialog.__init__(self, parent, -1, title, point, size, wx.DEFAULT_DIALOG_STYLE | wx.MAXIMIZE_BOX | wx.THICK_FRAME | wx.RESIZE_BORDER)
@@ -34,10 +31,7 @@ class sSingleChoiceDialog(wx.Dialog):
         self.ID_OK = 111
         self.ID_CANCEL = 112
 
-        #/Constants
-
         #Components:
-
         self.listChoices = wx.ListView(self, self.ID_CHOICES, (0, 0), (300, 300), style=wx.LC_REPORT|wx.LC_SINGLE_SEL|wx.LC_NO_HEADER)
 
         self.txtChoice = wx.TextCtrl(self, self.ID_TXT_CHOICE, '', (0, 0), (250, -1), style=wx.TE_READONLY)
@@ -55,14 +49,9 @@ class sSingleChoiceDialog(wx.Dialog):
 
         self.btnOk = wx.Button(self, self.ID_OK, "  &Ok  ")
 
-        #self.btnOk.SetDefault()
-
         self.btnCancel = wx.Button(self, self.ID_CANCEL, "  &Cancel  ")
 
-        #/Components
-
         #Sizer:
-
         self.theSizer = wx.BoxSizer(wx.VERTICAL)
 
         self.textSizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -98,10 +87,7 @@ class sSingleChoiceDialog(wx.Dialog):
         if SetSizer:
             self.SetSizerAndFit(self.theSizer)
 
-        #/Sizer
-
         #Events:
-
         self.Bind(wx.EVT_BUTTON, self.OnbtnCancel, id=self.ID_CANCEL)
         self.Bind(wx.EVT_BUTTON, self.OnbtnOk, id=self.ID_OK)
 
@@ -112,8 +98,6 @@ class sSingleChoiceDialog(wx.Dialog):
         self.Bind(wx.EVT_CHAR, self.OnChar)
 
         self.listChoices.Bind(wx.EVT_SIZE, self.OnSize)
-
-        #/Events
 
         if self.listChoices.GetItemCount() > 0:
             self.listChoices.Select(0)

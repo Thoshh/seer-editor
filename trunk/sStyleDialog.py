@@ -190,7 +190,6 @@ class sSeparatorDialog(wx.Dialog):
         self.LoadFavorites()
 
         #Sizer:
-
         self.theSizer = wx.BoxSizer(wx.VERTICAL)
         self.textSizer = wx.BoxSizer(wx.HORIZONTAL)
         self.favoritesSizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -223,8 +222,6 @@ class sSeparatorDialog(wx.Dialog):
 
         self.SetAutoLayout(True)
         self.SetSizerAndFit(self.theSizer)
-
-        #End Sizer
 
         self.Bind(wx.EVT_BUTTON,  self.OnbtnCancel, id=self.ID_CANCEL)
         self.Bind(wx.EVT_BUTTON,  self.OnbtnOk, id=self.ID_OK)
@@ -389,17 +386,11 @@ class sSimpleStyleDialog(wx.Dialog):
         self.boxFonts = wx.ListBox(self, self.ID_FONTS, wx.Point(10, 10), wx.Size(250, 250), self.FontList)
 
         try:
-            #self.boxFonts.SetStringSelection(self.font)
             i=self.boxFonts.FindString(self.font)
             if i<0:
                 i=0
             self.boxFonts.Select(i)
-            #self.boxFonts.EnsureVisible(i) # Bug: Doesn't work 
             self.boxFonts.SetFirstItem(i)
-            
-            
-            
-            
         except:
             sScrolledMessageDialog.ShowMessage(self, ("Something awful happened trying to \nset the font to the default."), "Error")
             self.boxFonts.SetSelection(0)
@@ -436,7 +427,6 @@ class sSimpleStyleDialog(wx.Dialog):
         self.btnOk = wx.Button(self, self.ID_OK, "&Ok", wx.Point(300, 0), wx.Size(-1, -1))
 
         #Sizer:
-
         self.theSizer = wx.FlexGridSizer(2, 2, 5, 1)
         self.styleSizerLeft = wx.BoxSizer(wx.VERTICAL)
         self.styleSizerRight = wx.BoxSizer(wx.VERTICAL)
@@ -467,8 +457,6 @@ class sSimpleStyleDialog(wx.Dialog):
         self.SetSizerAndFit(self.theSizer)
 
         self.btnCancel.SetDefault()
-
-        #End Sizer
 
         self.Bind(wx.EVT_LISTBOX,  self.OnFontSelect, id=self.ID_FONTS)
         self.Bind(wx.EVT_COMBOBOX,  self.OnSizeSelect, id=self.ID_SIZE)
@@ -635,7 +623,6 @@ class sStyleDialog(wx.Dialog):
         self.boxStyle = wx.ListBox(self, self.ID_STYLE, wx.DefaultPosition, wx.Size(150, 350), "")
 
         #Sizer:
-
         self.theSizer = wx.FlexGridSizer(2, 3, 5, 1)
         self.selectSizer = wx.FlexGridSizer(3, 3, 5, 10)
         self.listSizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -683,8 +670,6 @@ class sStyleDialog(wx.Dialog):
 
         self.SetAutoLayout(True)
         self.SetSizer(self.theSizer)
-
-        #End Sizer
 
         self.OnSelectLanguage(None)
 

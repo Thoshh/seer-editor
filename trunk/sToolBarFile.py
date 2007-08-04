@@ -136,17 +136,14 @@ def SetupToolBar(frame):
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_CLOSE_ALL, x))
             elif frame.ToolBarList[x] == "Close All Other Documents":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_CLOSE_ALL_OTHER_TABS, x))
-
             elif frame.ToolBarList[x] == "Print Setup":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_PRINT_SETUP, x))
             elif frame.ToolBarList[x] == "Print File":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_PRINT, x))
             elif frame.ToolBarList[x] == "Print Prompt":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_PRINTPROMPT, x))
-
             elif frame.ToolBarList[x] == "Exit":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_EXIT, x))
-
             elif frame.ToolBarList[x] == "Next Document":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_NEXT_TAB, x))
             elif frame.ToolBarList[x] == "Previous Document":
@@ -155,7 +152,6 @@ def SetupToolBar(frame):
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_FIRST_TAB, x))
             elif frame.ToolBarList[x] == "Last Document":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_LAST_TAB, x))
-
             elif frame.ToolBarList[x] == "Find":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_FIND, x))
             elif frame.ToolBarList[x] == "Replace":
@@ -168,7 +164,6 @@ def SetupToolBar(frame):
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_INSERT_REGEX, x))
             elif frame.ToolBarList[x] == "Insert Separator":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_INSERT_SEPARATOR, x))
-
             elif frame.ToolBarList[x] == "Go To":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_GOTO, x))
             elif frame.ToolBarList[x] == "Go To Block Start":
@@ -183,13 +178,8 @@ def SetupToolBar(frame):
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_GOTO_DEF_START, x))
             elif frame.ToolBarList[x] == "Go To Def End":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_GOTO_DEF_END, x))
-
-            #elif frame.ToolBarList[x] == "Source Browser Go To":
-            #    ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_SOURCEBROWSER_GOTO, x))
-
             elif frame.ToolBarList[x] == "Find And Complete":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_FIND_AND_COMPLETE, x))
-
             elif frame.ToolBarList[x] == "Comment":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_COMMENT_REGION, x))
             elif frame.ToolBarList[x] == "UnComment":
@@ -206,10 +196,8 @@ def SetupToolBar(frame):
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_UPPERCASE, x))
             elif frame.ToolBarList[x] == "Lowercase":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_LOWERCASE, x))
-
             elif frame.ToolBarList[x] == "Find And Complete":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_FIND_AND_COMPLETE, x))
-
             elif frame.ToolBarList[x] == "Copy":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_COPY, x))
             elif frame.ToolBarList[x] == "Cut":
@@ -218,7 +206,6 @@ def SetupToolBar(frame):
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_PASTE, x))
             elif frame.ToolBarList[x] == "Delete":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_DELETE, x))
-
             elif frame.ToolBarList[x] == "Select All":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_SELECT_ALL, x))
             elif frame.ToolBarList[x] == "Select None":
@@ -233,36 +220,26 @@ def SetupToolBar(frame):
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_FOLD_ALL, x))
             elif frame.ToolBarList[x] == "Expand All":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_EXPAND_ALL, x))
-
             elif frame.ToolBarList[x] == "Select All":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_SELECT_ALL, x))
-
             elif frame.ToolBarList[x] == "View In Left Panel":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_VIEW_IN_LEFT_PANEL, x))
             elif frame.ToolBarList[x] == "View In Right Panel":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_VIEW_IN_RIGHT_PANEL, x))
             elif frame.ToolBarList[x] == "View In Top Panel":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_VIEW_IN_TOP_PANEL, x))
-
-            #elif frame.ToolBarList[x] == "Toggle Source Browser":
-            #    ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_TOGGLE_SOURCEBROWSER, x))
             elif frame.ToolBarList[x] == "Preferences":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_PREFS, x))
-
             elif frame.ToolBarList[x] == "Customize Shortcuts":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_SHORTCUTS, x))
-
             elif frame.ToolBarList[x] == "Customize Pop Up Menu":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_POPUP, x))
-
             elif frame.ToolBarList[x] == "Customize ToolBar":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_CUSTOMIZE_TOOLBAR, x))
-
             elif frame.ToolBarList[x] == "Toggle Prompt":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_TOGGLE_PROMPT, x))
             elif frame.ToolBarList[x] == "Toggle View Whitespace":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_TOGGLE_VIEWWHITESPACE, x))
-
             elif frame.ToolBarList[x] == "Run":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_RUN, x))
             elif frame.ToolBarList[x] == "Set Arguments":
@@ -275,7 +252,6 @@ def SetupToolBar(frame):
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_CHECK_SYNTAX, x))
             elif frame.ToolBarList[x] == "Close Prompt":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_CLOSE_PROMPT, x))
-
             elif frame.ToolBarList[x] == "Help":
                 ToolBarIdList.append(AddandReturn(frame, bitmapFileArray, frame.ID_HELP, x))
             elif frame.ToolBarList[x] == "View Python Docs":

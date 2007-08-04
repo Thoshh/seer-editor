@@ -36,15 +36,6 @@ def GetPreferencesDictionary():
     #Each item in the Array:
     #(Preference, Preferences File String, Function)
     #Function: 0: (GetPref, Not an Integer,), 1: (GetPref, Integer), 2: (ExtractPref, Not an Integer).
-    #removed: 'Source Browser': [('sourcebrowserpanel', 'sourcebrowser.panel', 1),
-    #('sourcebrowsersize', 'sourcebrowser.size', 1),
-    #('sourcebrowserisvisible', 'sourcebrowser.is.visible', 1),
-    #('sourcebrowsercloseonactivate', 'sourcebrowser.close.on.activate', 1),
-    #('sourcebrowserissorted', 'sourcebrowser.is.sorted', 1),
-    #('sourcebrowserautorefreshonsave', 'sourcebrowser.auto.refresh.on.save', 1),
-    #('sourcebrowserautorefresh', 'sourcebrowser.auto.refresh', 1),
-    #('sourcebrowseruseimages', 'sourcebrowser.use.images', 1),
-    #('sourcebrowserstyle', 'sourcebrowser.style', 0)],"""
 
     return {'General': [('rememberwindowsizeandposition', 'remember.window.size.and.position', 1),
 ('rememberdialogsizesandpositions', 'remember.dialog.sizes.and.positions', 1),

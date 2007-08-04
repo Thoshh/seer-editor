@@ -41,9 +41,6 @@ from sMenu import sMenu
 import pydoc
 import tempfile
 
-
-#*******************************************************************************************************
-
 class sObject(wx.Object):
     def __init__(self):
         #wx.Object.__init__(self)
@@ -55,8 +52,6 @@ class sObject(wx.Object):
         except:
             return False
         return True
-
-#*******************************************************************************************************
 
 class sFrame(wx.Frame):
     def __init__(self, parent, id, title):
@@ -107,7 +102,6 @@ class sFrame(wx.Frame):
         self.rechecksyntax = re.compile('line \d+', re.M)
 
         #Find/Replace
-
         self.FindHistory = []
         self.ReplaceHistory = []
 
@@ -125,7 +119,6 @@ class sFrame(wx.Frame):
         self.programdirectory = os.path.dirname(os.path.abspath(sys.argv[0])).replace("\\", "/")
 
         #Preferences
-
         self.prefs = sPreferences(self.PLATFORM_IS_WIN, self.programdirectory)
         self.prefsfile = self.preferencesdirectory + "/preferences.dat"
 
@@ -221,7 +214,6 @@ class sFrame(wx.Frame):
         self.PluginModules = []
 
         #Plugin Events
-
         self.EVT_SEER_DOCUMENT_CHANGED = 0
         self.EVT_SEER_FILE_OPENING = 1
         self.EVT_SEER_FILE_OPENED = 2
@@ -233,7 +225,6 @@ class sFrame(wx.Frame):
         self.EVT_SEER_NEW_PROMPT = 8
 
         #Plugin Arrays:
-
         self.spyevents = []
 
         self.PluginShortcutsLoadedArray = []
@@ -378,8 +369,6 @@ class sFrame(wx.Frame):
         self.Bind(wx.EVT_MENU,  self.OnGoToDefStart, id=self.ID_GOTO_DEF_START)
         self.Bind(wx.EVT_MENU,  self.OnGoToDefEnd, id=self.ID_GOTO_DEF_END)
 
-        # self.Bind(wx.EVT_MENU,  self.OnSourceBrowserGoTo, id=self.ID_SOURCEBROWSER_GOTO)
-
         self.Bind(wx.EVT_MENU,  self.OnZoomIn, id=self.ID_ZOOM_IN)
         self.Bind(wx.EVT_MENU,  self.OnZoomOut, id=self.ID_ZOOM_OUT)
 
@@ -430,7 +419,7 @@ class sFrame(wx.Frame):
 
         # add import all button
         self.Bind(wx.EVT_TOOL, self.OnImportAll, id=self.ID_IMPORT_ALL)
-        # end import all
+        
         # add pydoc menu items
         self.Bind(wx.EVT_MENU, self.OnPyDocAll, id=self.ID_PYDOC_ALL)
         self.Bind(wx.EVT_MENU, self.OnPyDocCurrent, id=self.ID_PYDOC_CURR)
@@ -471,16 +460,6 @@ class sFrame(wx.Frame):
                     self.OpenFile(f, True)
                     self.txtDocument.OnModified(None)
                     x = x + 1
-
-        #Load SourceBrowser:
-        #Removing Source Browser for now
-        #if self.prefs.sourcebrowserisvisible:
-        #    self.ShowSourceBrowser()
-
-        #self.Bind(wx.EVT_END_PROCESS,  self.OnProcessEnded, id=-1)
-
-        #self.Bind(wx.EVT_KEY_DOWN, self.OnKeyDown)
-        #self.Bind(wx.EVT_CLOSE, self.OnCloseW)
 
         self.LoadPlugins()
 
@@ -846,13 +825,10 @@ class sFrame(wx.Frame):
         # define import all id
         self.ID_IMPORT_ALL = self.GetNewId()
 
-        # end import all
-
         # define pydoc ids
         self.ID_PYDOC_ALL = 1016
         self.ID_PYDOC_CURR = 1017
         self.ID_VIEW_PYDOC = 1018
-        # end pydoc
 
         self.ID_NEXT_DOCUMENT = 801
         self.ID_PREVIOUS_DOCUMENT = 802
@@ -879,8 +855,6 @@ class sFrame(wx.Frame):
         self.ID_GOTO_CLASS_END = 1154
         self.ID_GOTO_DEF_START = 1155
         self.ID_GOTO_DEF_END = 1156
-
-        #self.ID_SOURCEBROWSER_GOTO = 1157
 
         self.ID_SELECT_ALL = 1161
 
@@ -920,7 +894,6 @@ class sFrame(wx.Frame):
         self.ID_TOGGLE_FOLD = 1613
         self.ID_FOLD_ALL = 1611
         self.ID_EXPAND_ALL = 1612
-        #self.ID_TOGGLE_SOURCEBROWSER = 163
         self.ID_TOGGLE_VIEWWHITESPACE = 164
         self.ID_TOGGLE_PROMPT = 165
 
@@ -1057,7 +1030,6 @@ class sFrame(wx.Frame):
         else:
             try:
                 f = file(pluginsfile, 'wb')
-                #f.write('\n')
                 f.close()
             except:
                 self.ShowMessage('Error Ceating Default Index for Plugins.\n\nPlugins may not work correctly.', 'Plugins Error')
@@ -2364,9 +2336,6 @@ class sFrame(wx.Frame):
             self.lastprogargsArray[self.docPosition] = self.lastprogargs
         d.Destroy()
 
-    #def OnSourceBrowserGoTo(self, event):
-    #    sSourceBrowserGoTo.SourceBrowserGoTo(self, self.txtDocument)
-
     def OnSyntaxHighlightingPython(self, event):
         self.txtDocument.filetype = 0
         self.txtDocument.SetupPrefsDocument()
@@ -2415,18 +2384,6 @@ class sFrame(wx.Frame):
                 self.toolbar.ToggleTool(self.ID_TOGGLE_PROMPT,  True)
             self.mainpanel.OnSize(None)
             self.txtPrompt.SetFocus()
-
-    #def OnToggleSourceBrowser(self, event):
-    #    if self.SourceBrowser is None:
-    #        target, i = self.mainpanel.GetTargetNotebookPage(self.prefs.sourcebrowserpanel, 'Source Browser')
-    #        self.SourceBrowser = sSourceBrowserPanel(target, -1, self.prefs.sourcebrowserpanel, i)
-    #        self.mainpanel.SetPanelSize(self.prefs.sourcebrowserpanel, self.prefs.sourcebrowsersize)
-    #        target.SetPanel(self.SourceBrowser)
-    #        self.mainpanel.ShowPanel(self.prefs.sourcebrowserpanel, i)
-    #    else:
-    #        if not self.mainpanel.IsVisible(self.SourceBrowser.position, self.SourceBrowser.Index):
-    #            self.SourceBrowser.Browse()
-    #        self.mainpanel.TogglePanel(self.SourceBrowser.position, self.SourceBrowser.Index)
 
     def OnToggleViewWhiteSpace(self, event):
         if self.txtPrompt.GetSTCFocus():
@@ -2777,17 +2734,8 @@ class sFrame(wx.Frame):
             self.txtDocument.SetScrollWidth(scrollwidth)
 
             self.txtDocument.SetXOffset(0)
-            #/End Scrolling
 
             self.txtDocument.OnModified(None)
-
-            #Load SourceBrowser:
-            #if self.prefs.sourcebrowserisvisible:
-            #    self.ShowSourceBrowser()
-
-            #Refresh SourceBrowser:
-            #if self.SourceBrowser is not None:
-            #    self.SourceBrowser.Browse()
 
             if editrecentfiles:
                 self.ddirectory = os.path.dirname(filename)
@@ -2847,7 +2795,6 @@ class sFrame(wx.Frame):
         x = 0
         while x < num:
             self.documentsmenu.Remove(mnuitems[x].GetId())
-            #mnuitems[x].Destroy()
             x = x + 1
 
         self.setupdocumentsmenu()
@@ -3137,17 +3084,6 @@ class sFrame(wx.Frame):
 
     def ShowMessage(self, msg, title='Seer'):
         sScrolledMessageDialog.ShowMessage(self, msg, title)
-
-    """def ShowSourceBrowser(self):
-        if self.SourceBrowser is None:
-            target, i = self.mainpanel.GetTargetNotebookPage(self.prefs.sourcebrowserpanel, 'Source Browser')
-            self.SourceBrowser = sSourceBrowserPanel(target, -1, self.prefs.sourcebrowserpanel, i)
-            self.mainpanel.SetPanelSize(self.prefs.sourcebrowserpanel, self.prefs.sourcebrowsersize)
-            target.SetPanel(self.SourceBrowser)
-            self.mainpanel.ShowPanel(self.prefs.sourcebrowserpanel, i)
-        else:
-            self.SourceBrowser.Browse()
-            self.mainpanel.ShowPanel(self.SourceBrowser.position, self.SourceBrowser.Index, True)"""
 
     def ShowPrompt(self, Visible = True):
         if Visible:
@@ -3488,11 +3424,7 @@ class sFrame(wx.Frame):
         self.viewmenu.AppendSeparator()
         self.viewmenu.AppendMenu(self.ID_HIGHLIGHT, "&Syntax Highlighting", self.highlightmenu)
         self.viewmenu.AppendSeparator()
-        #self.viewmenu.Append(self.ID_TOGGLE_SOURCEBROWSER, 'Toggle Source Browser')
-        #self.viewmenu.Append(self.ID_SOURCEBROWSER_GOTO, 'Source Browser Go To', True)
-        self.viewmenu.AppendSeparator()
         self.viewmenu.Append(self.ID_TOGGLE_VIEWWHITESPACE, 'Toggle View Whitespace', False, 12)
-        #end limodou
         self.viewmenu.Append(self.ID_TOGGLE_PROMPT, 'Toggle Prompt')
 
         self.programmenu = sMenu(self)
@@ -3646,4 +3578,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

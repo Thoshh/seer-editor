@@ -25,7 +25,6 @@ import sScrolledMessageDialog
 import sFileDialog
 from sPrefsFile import ExtractPreferenceFromText
 
-#*******************************************************************************
 #Update Plugin List Dialog
 
 (UpdatePluginDialog, EVT_UPDATE_PLUGINDIALOG) = wx.lib.newevent.NewEvent()
@@ -111,10 +110,6 @@ Please try a different mirror.'''
             sScrolledMessageDialog.ShowMessage(self, errormessage, 'Plugin List Error')
             self.EndModal(0)
 
-
-
-
-#*******************************************************************************
 #Select Plugins Dialog
 class sSelectPluginsDialog(wx.Dialog):
     def __init__(self, parent):
@@ -1016,8 +1011,7 @@ class sPluginInstallWizard(wx.wizard.Wizard):
 
     def Run(self):
         self.RunWizard(self.LocationPage)
-
-#*******************************************************************************
+        
 #UnInstall Wizard
 
 class sPluginUnInstallSelectPage(wx.wizard.WizardPageSimple):

@@ -23,7 +23,6 @@ import os, sys, keyword
 import wx
 from sSingleChoiceDialog import sSingleChoiceDialog
 
-#*******************************************************************************************************
 #Utility Functions for parsing import strings,
 #and getting the path for each module.
 

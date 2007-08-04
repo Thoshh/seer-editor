@@ -93,8 +93,6 @@ class sToolBarDialog(wx.Dialog):
 
         self.customNames, self.customFiles16, self.customFiles24 = sToolBarFile.getCustomBitmaps(self.parent.datdirectory)
 
-        #End Icons
-
         ToolBarList.insert(0, "<ROOT>")
 
         programmenulist = sShortcutsFile.GetShortcutList()
@@ -112,7 +110,6 @@ class sToolBarDialog(wx.Dialog):
         self.ListArray.append(programmenulist)
 
         #STC
-
         stclist = []
         map(stclist.append, sShortcutsFile.GetSTCShortcutList())
         stclist.insert(0, "<Insert Separator>")

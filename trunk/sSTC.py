@@ -25,14 +25,11 @@ import sShortcuts, sShortcutsFile
 from sDragAndDrop import sDropTarget
 from sFindReplaceDialog import sFinder
 
-#*******************************************************************************************************
-
 class sStyledTextControl(wx.stc.StyledTextCtrl):
     def __init__(self, parent, id, grandparent):
         wx.stc.StyledTextCtrl.__init__(self, parent, id)
 
         #Constants:
-
         self.PYTHON_FILE = 0
         self.CPP_FILE = 1
         self.HTML_FILE = 2

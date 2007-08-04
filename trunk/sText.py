@@ -142,7 +142,6 @@ class sText(sSTC.sStyledTextControl):
         while x < numtabs:
             self.AddText(self.addchar)
             x = x + 1
-        #/Auto Indent Code
 
         #Ensure proper keyboard navigation:
         self.CmdKeyExecute(wx.stc.STC_CMD_CHARLEFT)
@@ -188,9 +187,6 @@ class sText(sSTC.sStyledTextControl):
         if self.DynamicScript:
             return
         if not self.IsSplitView:
-            #if self.grandparent.prefs.sourcebrowserautorefresh:
-            #    if self.grandparent.SourceBrowser is not None:
-            #        self.grandparent.SourceBrowser.Browse()
             modify = self.GetModify()
             if (modify != self.modified) or (event is None):
                 self.modified = modify
@@ -442,8 +438,6 @@ class sText(sSTC.sStyledTextControl):
             self.SetEdgeMode(wx.stc.STC_EDGE_BACKGROUND)
         else:
             self.SetEdgeMode(wx.stc.STC_EDGE_NONE)
-
-        #/LongLineCol from Chris McDonough
 
         self.SetupLineNumbersMargin()
 
