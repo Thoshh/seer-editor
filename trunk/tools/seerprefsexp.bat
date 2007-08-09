@@ -1,1 +1,0 @@
-python.exe ..\seer.py --preferencesbasepath=c:/seer/seer28_experimental
