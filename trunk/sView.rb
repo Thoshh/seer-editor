@@ -1,10 +1,10 @@
 require 'gtk2'
 require 'gtksourceview'
 
-lang = Gtk::SourceLanguagesManager.new.get_language('text/x-ruby')
+@lang = Gtk::SourceLanguagesManager.new.get_language('text/x-ruby')
 @sourceview = Gtk::SourceView.new()
 @buffer = @sourceview.buffer
-@buffer.language = lang
+@buffer.language = @lang
 
 @sourceview.buffer.highlight = true
 @sourceview.show_line_numbers = 1
