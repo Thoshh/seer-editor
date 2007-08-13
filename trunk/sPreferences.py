@@ -61,14 +61,10 @@ def GetPreferencesDictionary():
 ('extensions[1]', 'filetypes.extensions.cpp', 0),
 ('extensions[2]', 'filetypes.extensions.html', 0),
 ('extensions[3]', 'filetypes.extensions.text', 0),
-('extensions[4]', 'filetypes.extensions.ruby', 0),
-('extensions[5]', 'filetypes.extensions.for', 0),
 ('docfolding[0]', 'filetypes.docfolding.python', 1),
 ('docfolding[1]', 'filetypes.docfolding.cpp', 1),
 ('docfolding[2]', 'filetypes.docfolding.html', 1),
 ('docfolding[3]', 'filetypes.docfolding.text', 1),
-('docfolding[4]', 'filetypes.docfolding.ruby', 1),
-('docfolding[5]', 'filetypes.docfolding.for', 1),
 ('doctabwidth[0]', 'filetypes.doctabwidth.python', 1),
 ('doctabwidth[1]', 'filetypes.doctabwidth.cpp', 1),
 ('doctabwidth[2]', 'filetypes.doctabwidth.html', 1),
@@ -266,9 +262,9 @@ class sPreferences:
         #@ = replace with lowercase match & = replace with exact match
         self.windowsshortcutreplacetable = '[A-Z],/mnt/win_@#'
         if self.platform_is_windows:
-            self.wildcard = "Python Source (*.pyw *.py)|*.pyw;*.py|C/C++ Source (*.c *.cc *.cpp *.cxx *.h *.hh *.hpp *.hxx)|*.c;*.cc;*.cpp;*.cxx;*.h;*.hh;*.hpp;*.hxx|HTML Files (*.htm *.html *.shtm *.shtml *.xml)|*.htm;*.html;*.shtm;*.shtml;*.xml|Backup Files (*.bak)|*.bak|Plain Text (*.txt *.dat *.log)|*.txt;*.dat;*.log|Ruby Source (*.rbw *.rb)|*.rbw;*.rb|Fortran Source (*.for *.f)|*.for;*.f|All Files (*)|*"
+            self.wildcard = "Python Source (*.pyw *.py)|*.pyw;*.py|C/C++ Source (*.c *.cc *.cpp *.cxx *.h *.hh *.hpp *.hxx)|*.c;*.cc;*.cpp;*.cxx;*.h;*.hh;*.hpp;*.hxx|HTML Files (*.htm *.html *.shtm *.shtml *.xml)|*.htm;*.html;*.shtm;*.shtml;*.xml|Backup Files (*.bak)|*.bak|Plain Text (*.txt *.dat *.log)|*.txt;*.dat;*.log|All Files (*)|*"
         else:
-            self.wildcard = "Python Source (*.py *.pyw)|*.py;*.pyw|C/C++ Source (*.c *.cc *.cpp *.cxx *.h *.hh *.hpp *.hxx)|*.c;*.cc;*.cpp;*.cxx;*.h;*.hh;*.hpp;*.hxx|HTML Files (*.htm *.html *.shtm *.shtml *.xml)|*.htm;*.html;*.shtm;*.shtml;*.xml|Backup Files (*.bak)|*.bak|Plain Text (*.txt *.dat *.log)|*.txt;*.dat;*.log|Ruby Source (*.rbw *.rb)|*.rbw;*.rb|Fortran Source (*.for *.f)|*.for;*.f|All Files (*)|*"
+            self.wildcard = "Python Source (*.py *.pyw)|*.py;*.pyw|C/C++ Source (*.c *.cc *.cpp *.cxx *.h *.hh *.hpp *.hxx)|*.c;*.cc;*.cpp;*.cxx;*.h;*.hh;*.hpp;*.hxx|HTML Files (*.htm *.html *.shtm *.shtml *.xml)|*.htm;*.html;*.shtm;*.shtml;*.xml|Backup Files (*.bak)|*.bak|Plain Text (*.txt *.dat *.log)|*.txt;*.dat;*.log|All Files (*)|*"
 
         #Drag and Drop
         self.draganddropmode = 2
@@ -457,6 +453,20 @@ class sPreferences:
         self.findreplacepromptonreplace = 1
         self.findreplaceautowrap = 0
         self.findreplaceundercursor = 1
+
+        #Source Browser Settings
+        
+        #self.sourcebrowserpanel = 0
+        #self.sourcebrowsersize = 25
+        #self.sourcebrowserisvisible = 1
+        #self.sourcebrowsercloseonactivate = 0
+        #self.sourcebrowserissorted = 0
+        #self.sourcebrowserautorefreshonsave = 1
+        #self.sourcebrowserautorefresh = 0
+        #self.sourcebrowseruseimages = 0
+        #self.sourcebrowserstyle = "fore:#FF0000,back:#FFFFFF,size:10,face:Sans Serif"
+        #if self.platform_is_windows:
+        #    self.sourcebrowserstyle = "fore:#FF0000,back:#FFFFFF,size:10,face:MS Sans Serif"
 
         #Bookmarks Settings
         self.bookmarksstyle = "fore:#000000,back:#FFFFFF,size:12,face:fixed,bold"
