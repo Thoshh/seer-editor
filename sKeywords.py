@@ -30,6 +30,10 @@ def GetKeyWords(number):
         return "".join(GetCPPKeywords())
     elif number == 2:
         return "".join(GetHTMLKeyWords())
+    elif number == 3:
+        return "".join(GetRubyKeyWords())
+    elif number == 4:
+        return "".join(GetFortranKeyWords())
     return ""
 
 def GetLexer(number):
@@ -39,6 +43,10 @@ def GetLexer(number):
         return wx.stc.STC_LEX_CPP
     elif number == 2:
         return wx.stc.STC_LEX_HTML
+    elif number == 3:
+        return wx.stc.STC_LEX_RUBY
+    elif number == 4:
+        return wx.stc.STC_LEX_FORTRAN
     return wx.stc.STC_LEX_NULL
 
 def GetCPPKeywords():
