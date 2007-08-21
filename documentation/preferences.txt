@@ -27,12 +27,11 @@ dialog that allows you to import/export:
 
 - preferences, shortcuts, the pop up menu, the toolbar;
 - plugins;
-- drscripts;
 - all of the above.
 
 This is to facilitate setting up a specific environment. 
 (Eg you can distribute SillyDefaults.zip, which includes the 
-preferences, plugins, and drscripts you want all recipients 
+preferences, and plugins you want all recipients 
 to have installed.)
 
 **WARNING: Importing Will Overwrite!**
@@ -43,23 +42,16 @@ DrPython will overwrite any duplicates on import. This means:
 - Ditto shortcuts, the pop up menu, and the toolbar.
 - Which Plugins are loaded at startup, and any duplicates,
   will be overwritten.
-- The drscript menu will be overwritten.
 - Also, any duplicates will overwritten.
 
-After importing, you must restart DrPython to see the changes.
-
-When Exporting, DrPython will store drscripts in the 
-preferences directory (in the zip file). The directory 
-structure will mirror the menu. This means that when you 
-then import drscripts, they will be physically located in 
-your preferences directory, under 'drscripts'.
+After importing, you must restart Seer to see the changes.
 
 Back to the Top_
 
 Bookmarks
 ==========
 
-This tells DrPython how the Edit Bookmarks Dialog should look.
+This tells Seer how the Edit Bookmarks Dialog should look.
 Also applies to Documentation Bookmarks.
 
 Style
@@ -79,7 +71,7 @@ the text of the currently open file.
 Show Line Numbers
 ------------------
 
-Sets whether or not DrPython shows line numbers.
+Sets whether or not Seer shows line numbers.
 
 Remove Trailing Whitespace
 ----------------------------
@@ -103,7 +95,7 @@ Chooses the auto indentation method:
 AutoReload
 -----------
 
-Automatically check (OnActivation of DrPython) if any open 
+Automatically check (OnActivation of Seer) if any open 
 files have been modified by an outside source. It then 
 prompts the user to reload the file. If not, the modification
 time for the document (in program) is reset.
@@ -120,7 +112,7 @@ Use File's Indentation
 If on, use the indentation type of the loaded file. 
 (Only runs on Open). In other words: if the default 
 indentation type is tabs but you load a file that uses 
-spaces, DrPython will use spaces for indentation for that 
+spaces, Seer will use spaces for indentation for that 
 document, while still using tabs as the default for other 
 documents.
 
@@ -141,7 +133,7 @@ line.
 Whitespace is Visible on Startup
 ---------------------------------
 
-When DrPython starts up, automatically toggles whitespace 
+When Seer starts up, automatically toggles whitespace 
 is visible.
 
 Use Indentation Guides
@@ -155,14 +147,14 @@ Long Line Indicator Column
 
 Set a column to indicate you have gone past a particular 
 position (79, for example). Using a negative number tells 
-DrPython to highlight the text past the specified position,
-instead of drawing a column. 0 tells DrPython not to draw 
+Seer to highlight the text past the specified position,
+instead of drawing a column. 0 tells Seer not to draw 
 anything.
 
 Scroll Extra Page
 ------------------
 
-This tells DrPython to set the vertical scroll range to one 
+This tells Seer to set the vertical scroll range to one 
 page more than the length of the current document.
 
 Highlight Current Line
@@ -174,7 +166,7 @@ Caret Style.
 Comment Mode
 -------------
 
-Sets where DrPython places the comment string. If Start of 
+Sets where Seer places the comment string. If Start of 
 Line, then at the start of every line in the selected region.
 If Start of Word, then at the start of the first word of 
 every line in the selected region.
@@ -234,7 +226,7 @@ Back to the Top_
 Drag and Drop
 ==============
 
-This sets the behaviour of drag and drop in DrPython.
+This sets the behaviour of drag and drop in Seer.
 
 Drag and Drop Mode
 -------------------
@@ -251,45 +243,16 @@ This can be set to one of three values:
 Drag and Drop Text Mode
 ------------------------
 
-Sets the whether Dragging and Dropping Text within DrPython 
+Sets the whether Dragging and Dropping Text within Seer 
 is by default a cut or a copy operation. The secondary 
 behaviour can be executed when the control key is down.
-
-Back to the Top_
-
-DrScript
-=========
-
-This sets the behavior of Adding/Creating a Script.
-
-Default Directory
-------------------
-
-This tells DrPython what directory to set the Add/New Script
-Dialog to.
-
-Style
-------
-
-This sets how the Move/Rename Scripts Dialog appears 
-(foreground and background color, font, size, 
-underline/bold/italics).
-
-Load Examples
---------------
-
-Loads all example scripts from the DrPython program 
-directory, and places them in a submenu of DrScript. 
-Note that disabling this option will remove any Shortcuts 
-for these Scripts. (If you subsequently update DrScript 
-Shortcuts)
 
 Back to the Top_
 
 File Dialog
 ============
 
-This sets the behaviour of file dialogs in DrPython.
+This sets the behaviour of file dialogs in Seer.
 
 Default Extension (".py")
 --------------------------
@@ -393,7 +356,7 @@ statement).
 Tab Width
 ----------
 
-This tells DrPython how big to make tabs look (``\t``). 
+This tells Seer how big to make tabs look (``\t``). 
 For example, 8 will make a single tab look like 8 spaces.
 
 Line Ending Format
@@ -472,7 +435,7 @@ These apply to the program as a whole.
 Remember Window Size And Position
 ----------------------------------
 
-Remembers the size and position of the DrPython window.
+Remembers the size and position of the Seer window.
 
 Remember Dialog Sizes and Positions
 ------------------------------------
@@ -498,7 +461,7 @@ Default Encoding
 ------------------
 
 This is the encoding used by default. (If Auto Detect is 
-enabled, DrPython will try unicode first). You can manually
+enabled, Seer will try unicode first). You can manually
 enter an encoding, leave it blank to disable, or select 
 from the list of encodings: the default locale (if available),
 ascii, latin-1, utf-8, and utf-16. (Only if wxPython was 
@@ -537,8 +500,8 @@ Clicking a tab in the notebook will close that tab.
 Max Number of Recent Files
 ---------------------------
 
-This tells DrPython how many recent files to keep track of.
-0 is the least you can enter, and will cause DrPython to 
+This tells Seer how many recent files to keep track of.
+0 is the least you can enter, and will cause Seer to 
 ignore recent files. 
 
 View Line Endings With Whitespace
@@ -549,12 +512,12 @@ View end of line characters when whitespace is visible.
 Check Line Ending Format on Open
 ---------------------------------
 
-This tells DrPython to check to see if your default line
+This tells Seer to check to see if your default line
 ending is used as the line ending when you open a file. 
 
 Check Indentation Type on Open
 -------------------------------
-This tells DrPython to check to see if your default 
+This tells Seer to check to see if your default 
 indentation type is being used in the opened file. 
 
 Python Arguments
@@ -570,15 +533,15 @@ prompt.
 Icon Size
 -----------
 
-This tells DrPython how big the toolbar needs to be. 
-Selecting 0 will (on restart) tell DrPython to not load the 
+This tells Seer how big the toolbar needs to be. 
+Selecting 0 will (on restart) tell Seer to not load the 
 ToolBar at all.
 
 Default Directory
 ------------------
 
-This tells DrPython where to look for files initially.
-Once a file has been opened, DrPython sets the current 
+This tells Seer where to look for files initially.
+Once a file has been opened, Seer sets the current 
 directory to the file's directory. 
 
 Enable Feedback
@@ -590,14 +553,14 @@ successful. (For example, successfully updated preferences).
 Always Prompt On Exit
 ----------------------
 
-This tells DrPython to always ask if the user wants to exit,
+This tells Seer to always ask if the user wants to exit,
 even if there is no current file, or the current file has 
 been saved. 
 
 Backup File On Save
 --------------------
 
-Whenever you save a file, before DrPython writes to the file,
+Whenever you save a file, before Seer writes to the file,
 it will make a renamed copy (the filename with .bak attached)
 in the same folder.
 
@@ -624,19 +587,19 @@ These are the preferences for printing.
 Document Line Numbers
 ----------------------
 
-This tells DrPython whether or not to print line numbers 
+This tells Seer whether or not to print line numbers 
 when printing the current file.
 
 Prompt Line Numbers
 --------------------
 
-This tells DrPython whether or not to print line numbers 
+This tells Seer whether or not to print line numbers 
 when printing the text of the prompt.
 
 Tab Width
 ----------
 
-This tells DrPython how big to make tabs look (``\t``) when 
+This tells Seer how big to make tabs look (``\t``) when 
 printing. For example, 5 will make a single tab look like 
 5 spaces.
 
@@ -656,7 +619,7 @@ Sets the margin width in pixels for linenumbers.
 Visible By Default
 --------------------
 
-If True, tells DrPython to show the prompt by default for
+If True, tells Seer to show the prompt by default for
 each document. 
 
 Use Tabs
@@ -668,7 +631,7 @@ If not, uses the number of spaces specified in tabwidth.
 Tab Width
 ----------
 
-This tells DrPython how big to make tabs look (``\t``).
+This tells Seer how big to make tabs look (``\t``).
 For example, 8 will make a single tab look like 8 spaces. 
 
 Line Ending Format
@@ -687,13 +650,13 @@ one line.
 Whitespace is Visible on Startup
 ---------------------------------
 
-When DrPython starts up, automatically toggles whitespace 
+When Seer starts up, automatically toggles whitespace 
 is visible. 
 
 Scroll Extra Page
 ------------------
 
-This tells DrPython to set the vertical scroll range to 
+This tells Seer to set the vertical scroll range to 
 one page more than the length of the prompt. 
 
 Vertical Size
@@ -752,7 +715,7 @@ Back to the Top_
 Source Browser
 ===============
 
-This tells DrPython how the source browser looks and acts.
+This tells Seer how the source browser looks and acts.
 
 Position
 ---------
@@ -763,20 +726,20 @@ top of the current document.
 Visible By Default
 -------------------
 
-If True, tells DrPython to show the source browser by default
+If True, tells Seer to show the source browser by default
 for each document. 
 
 Close On Activate
 -------------------
 
 When you activate an item (select it with a double click, 
-or with the keyboard), this tells DrPython whether or not 
+or with the keyboard), this tells Seer whether or not 
 to close the Source Browser window. 
 
 Sorted (Alphabetical)
 ----------------------
 
-This tells DrPython whether or not to sort 
+This tells Seer whether or not to sort 
 classes/functions/import statements alphabetically, or leave 
 them in the order they appear in the program. 
 
