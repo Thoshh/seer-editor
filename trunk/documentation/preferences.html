@@ -57,7 +57,6 @@ utility on your preferences file.</p>
 <li><a class="reference" href="#drag-and-drop-text-mode" id="id45" name="id45">Drag and Drop Text Mode</a></li>
 </ul>
 </li>
-<li><a class="reference" href="#drscript" id="id46" name="id46">DrScript</a><ul>
 <li><a class="reference" href="#default-directory" id="id47" name="id47">Default Directory</a></li>
 <li><a class="reference" href="#id2" id="id48" name="id48">Style</a></li>
 <li><a class="reference" href="#load-examples" id="id49" name="id49">Load Examples</a></li>
@@ -166,12 +165,11 @@ dialog that allows you to import/export:</p>
 <ul class="simple">
 <li>preferences, shortcuts, the pop up menu, the toolbar;</li>
 <li>plugins;</li>
-<li>drscripts;</li>
 <li>all of the above.</li>
 </ul>
 <p>This is to facilitate setting up a specific environment. 
 (Eg you can distribute SillyDefaults.zip, which includes the 
-preferences, plugins, and drscripts you want all recipients 
+preferences, and plugins you want all recipients 
 to have installed.)</p>
 <p><strong>WARNING: Importing Will Overwrite!</strong></p>
 <p>DrPython will overwrite any duplicates on import. This means:</p>
@@ -180,15 +178,8 @@ to have installed.)</p>
 <li>Ditto shortcuts, the pop up menu, and the toolbar.</li>
 <li>Which Plugins are loaded at startup, and any duplicates,
 will be overwritten.</li>
-<li>The drscript menu will be overwritten.</li>
 <li>Also, any duplicates will overwritten.</li>
 </ul>
-<p>After importing, you must restart DrPython to see the changes.</p>
-<p>When Exporting, DrPython will store drscripts in the 
-preferences directory (in the zip file). The directory 
-structure will mirror the menu. This means that when you 
-then import drscripts, they will be physically located in 
-your preferences directory, under 'drscripts'.</p>
 <p>Back to the <a class="reference" href="#top">Top</a></p>
 </div>
 <div class="section" id="bookmarks">
@@ -365,30 +356,7 @@ behaviour can be executed when the control key is down.</p>
 <p>Back to the <a class="reference" href="#top">Top</a></p>
 </div>
 </div>
-<div class="section" id="drscript">
-<h1><a class="toc-backref" href="#id46" name="drscript">DrScript</a></h1>
-<p>This sets the behavior of Adding/Creating a Script.</p>
-<div class="section" id="default-directory">
-<h2><a class="toc-backref" href="#id47" name="default-directory">Default Directory</a></h2>
-<p>This tells DrPython what directory to set the Add/New Script
-Dialog to.</p>
-</div>
-<div class="section" id="id2">
-<h2><a class="toc-backref" href="#id48" name="id2">Style</a></h2>
-<p>This sets how the Move/Rename Scripts Dialog appears 
-(foreground and background color, font, size, 
-underline/bold/italics).</p>
-</div>
-<div class="section" id="load-examples">
-<h2><a class="toc-backref" href="#id49" name="load-examples">Load Examples</a></h2>
-<p>Loads all example scripts from the DrPython program 
-directory, and places them in a submenu of DrScript. 
-Note that disabling this option will remove any Shortcuts 
-for these Scripts. (If you subsequently update DrScript 
-Shortcuts)</p>
-<p>Back to the <a class="reference" href="#top">Top</a></p>
-</div>
-</div>
+
 <div class="section" id="file-dialog">
 <h1><a class="toc-backref" href="#id50" name="file-dialog">File Dialog</a></h1>
 <p>This sets the behaviour of file dialogs in DrPython.</p>
