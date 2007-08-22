@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# Initial code framework based from DrPython, Copyright 2003-2007 Daniel Pozmanter
+
 #    Distributed under the terms of the GPL (GNU Public License)
 #
 #    Seer is free software; you can redistribute it and/or modify
@@ -15,6 +17,15 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program; if not, write to the Free Software
 #    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+#This loverly little file
+#let's people grab file attributes from the
+#.lnk file format (windows shortcut).
+#
+#It does not require any libraries external to python.
+
+# Adapted from the excellent perl code found in smb2web.
+# (smb2web by Rolf Howarth)
 
 import string, re
 
