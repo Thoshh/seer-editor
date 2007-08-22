@@ -88,7 +88,7 @@ class sAboutContentPanel(wx.Panel):
 
         author.SetFont(standardfont)
 
-        credits = sStaticLink(self, 1, ' Credits ', sframe.programdirectory + "/documentation/credits.html", sframe)
+        #credits = sStaticLink(self, 1, ' Credits ', sframe.programdirectory + "/documentation/credits.html", sframe)
 
         website = sStaticLink(self, 2, ' http://code.google.com/ ', 'http://code.google.com/', sframe)
 
@@ -200,7 +200,7 @@ class sAboutDialog(wx.Dialog):
 
         self.topSizer.Add(wx.lib.stattext.GenStaticText(self, -1, '  '), 0, wx.SHAPED | wx.ALIGN_CENTER_VERTICAL)
 
-        self.topSizer.Add(wx.StaticBitmap(self, -1, wx.BitmapFromImage(wx.Image(parent.programdirectory + "/documentation/drpython.png", wx.BITMAP_TYPE_PNG))), 0, wx.SHAPED | wx.ALIGN_CENTER_VERTICAL)
+        self.topSizer.Add(wx.StaticBitmap(self, -1, wx.BitmapFromImage(wx.Image(parent.programdirectory + "/documentation/seer.png", wx.BITMAP_TYPE_PNG))), 0, wx.SHAPED | wx.ALIGN_CENTER_VERTICAL)
 
         self.topSizer.Add(wx.lib.stattext.GenStaticText(self, -1, '  '), 0, wx.SHAPED | wx.ALIGN_CENTER_VERTICAL)
 
