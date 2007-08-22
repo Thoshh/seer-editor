@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# Initial code framework based from DrPython, Copyright 2003-2007 Daniel Pozmanter
+
 #    Distributed under the terms of the GPL (GNU Public License)
 #
 #    Seer is free software; you can redistribute it and/or modify

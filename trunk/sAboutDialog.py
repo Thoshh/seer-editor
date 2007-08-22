@@ -90,7 +90,7 @@ class sAboutContentPanel(wx.Panel):
 
         #credits = sStaticLink(self, 1, ' Credits ', sframe.programdirectory + "/documentation/credits.html", sframe)
 
-        website = sStaticLink(self, 2, ' http://code.google.com/ ', 'http://code.google.com/', sframe)
+        website = sStaticLink(self, 1, ' http://code.google.com/ ', 'http://code.google.com/', sframe)
 
         self.theSizer = wx.BoxSizer(wx.VERTICAL)
         tempstat = wx.lib.stattext.GenStaticText(self, -1, '   ')

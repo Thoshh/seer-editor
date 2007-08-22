@@ -1,3 +1,4 @@
+# Initial code framework based from DrPython, Copyright 2003-2007 Daniel Pozmanter
 
 #    Distributed under the terms of the GPL (GNU Public License)
 #

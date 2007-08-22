@@ -1,5 +1,7 @@
 
 #    Distributed under the terms of the GPL (GNU Public License)
+
+# Initial code framework based from DrPython, Copyright 2003-2007 Daniel Pozmanter
 #
 #    Seer is free software; you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
